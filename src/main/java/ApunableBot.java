@@ -12,14 +12,15 @@ public class ApunableBot {
         String botName = "ApunableBot";
         String horizontalLine = "____________________________________________________________";
 
-        System.out.println(
-            String.format("""
-            ____________________________________________________________
-            Hello! I'm %s
-            What can I do for you?
-            ____________________________________________________________"""
-            , botName)
-        );
+        System.out.printf("""
+        ____________________________________________________________
+        Hello! I'm %s
+        What can I do for you?
+        ____________________________________________________________
+        """
+        , botName);
+
+        ArrayList<String> tasks = new ArrayList<>();
 
         String input = "";
         while(!input.equals("bye")) {
@@ -28,12 +29,18 @@ public class ApunableBot {
 
             System.out.print("\nReply from bot: \n");
             System.out.println(horizontalLine);
-            System.out.print("\t");
 
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-            } else {
-                System.out.println(input);
+            switch (input) {
+                case "bye" -> System.out.println("\tBye. Hope to see you again soon!");
+                case "list" -> {
+                    for(int i = 0; i < tasks.size(); i ++) {
+                        System.out.printf("\t%d. %s\n", i + 1, tasks.get(i));
+                    }
+                }
+                default -> {
+                    tasks.add(input);
+                    System.out.printf("\tadded: %s\n", input);
+                }
             }
 
             System.out.println(horizontalLine);
