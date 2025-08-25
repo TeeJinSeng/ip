@@ -47,16 +47,25 @@ public class ApunableBot {
         outputs.add("What can I do for you?");
         prettyPrint(outputs);
 
-        while (!input.equals("bye")) {
+        while (true) {
             outputs.clear();
             System.out.print("Your query:\n");
 
             input = sc.nextLine();
+            input = input.trim();
             inputs = input.split(" ", 2);
+
+            if (input.equals("")) {
+                outputs.add("Please type something");
+                prettyPrint(outputs);
+                continue;
+            }
 
             switch (inputs[0]) {
                 case "bye" -> {
                     outputs.add("Bye. Hope to see you again soon!");
+                    prettyPrint(outputs);
+                    break;
                 }
                 case "list" -> {
                     outputs.add("Here are the tasks in your list:");
@@ -65,37 +74,118 @@ public class ApunableBot {
                     }
                 }
                 case "mark" -> {
-                    int index = Integer.parseInt(inputs[1]) - 1;
+                    int index;
+                    try {
+                        index = Integer.parseInt(inputs[1]) - 1;
+                    } catch (NumberFormatException e) {
+                        outputs.add("Invalid number format");
+                        prettyPrint(outputs);
+                        continue;
+                    }
+
+                    if (index < 0 || index >= tasks.size()) {
+                        outputs.add(String.format("Please enter a number between 1 and %d", tasks.size()));
+                        prettyPrint(outputs);
+                        continue;
+                    }
+
                     tasks.get(index).markAs(true);
                     outputs.add("Nice! I've marked this task as done:");
                     outputs.add("  " + tasks.get(index).toString());
                 }
                 case "unmark" -> {
-                    int index = Integer.parseInt(inputs[1]) - 1;
+                    int index;
+                    try {
+                        index = Integer.parseInt(inputs[1]) - 1;
+                    } catch (NumberFormatException e) {
+                        outputs.add("Invalid number format");
+                        prettyPrint(outputs);
+                        continue;
+                    }
+
+                    if (index < 0 || index >= tasks.size()) {
+                        outputs.add(String.format("Please enter a number between 1 and %d", tasks.size()));
+                        prettyPrint(outputs);
+                        continue;
+                    }
+
                     tasks.get(index).markAs(false);
                     outputs.add("OK, I've marked this task as not done yet:");
                     outputs.add("  " + tasks.get(index).toString());
                 }
                 case "todo", "event", "deadline" -> {
-                    outputs.add("Got it. I've added this task:");
                     Task task;
+
+                    if (inputs.length <= 1 || inputs[1].isBlank()) {
+                        outputs.add("Please provide more information for the task");
+                        prettyPrint(outputs);
+                        continue;
+                    }
                     
                     switch (inputs[0]) {
-                        case "todo" -> task = new Todo(inputs[1]);
+                        case "todo" -> task = new Todo(inputs[1].trim());
                         case "event" -> {
-                            inputs = inputs[1].split(" /from ");
-                            String desc = inputs[0];
-                            inputs = inputs[1].split(" /to ");
-                            task = new Event(desc, inputs[0], inputs[1]);
+                            int fromIndex = inputs[1].indexOf("/from");
+                            int toIndex = inputs[1].indexOf("/to");
+
+                            if (fromIndex == -1) {
+                                outputs.add("/from is missing");
+                                prettyPrint(outputs);
+                                continue;
+                            } else if (toIndex == -1) {
+                                outputs.add("/to is missing");
+                                prettyPrint(outputs);
+                                continue;
+                            }
+
+                            String desc = inputs[1].substring(0, fromIndex).trim();
+                            String from = inputs[1].substring(fromIndex + "/from".length(), toIndex).trim();
+                            String to = inputs[1].substring(toIndex + "/to".length()).trim();
+
+                            if (desc.isEmpty()) {
+                                outputs.add("Description for event cannot be empty");
+                                prettyPrint(outputs);
+                                continue;
+                            } else if (from.isEmpty()) {
+                                outputs.add("From for event cannot be empty");
+                                prettyPrint(outputs);
+                                continue;
+                            } else if (to.isEmpty()) {
+                                outputs.add("To for event cannot be empty");
+                                prettyPrint(outputs);
+                                continue;
+                            }
+
+                            task = new Event(desc, from, to);
                         }
                         case "deadline" -> {
-                            inputs = inputs[1].split(" /by ");
-                            task = new Deadline(inputs[0], inputs[1]);
+                            inputs = inputs[1].split("/by");
+                            if (inputs.length <= 1) {
+                                outputs.add("/by is missing");
+                                prettyPrint(outputs);
+                                continue;
+                            }
+
+                            String desc = inputs[0].trim();
+                            String by = inputs[1].trim();
+
+                            if (desc.isEmpty()) {
+                                outputs.add("Description for deadline cannot be empty");
+                                prettyPrint(outputs);
+                                continue;
+                            } else if (by.isEmpty()) {
+                                outputs.add("by for deadline cannot be empty");
+                                prettyPrint(outputs);
+                                continue;
+                            }
+
+                            task = new Deadline(desc, by);
                         }
                         default -> task = new Task(input);
                     }
                     tasks.add(task);
 
+                    outputs.add("Got it. I've added this task:");
                     outputs.add("  " + task);
                     outputs.add(String.format("Now you have %d tasks in the list.", tasks.size()));
                 }
