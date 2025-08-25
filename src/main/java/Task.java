@@ -1,0 +1,22 @@
+public class Task {
+    protected String description;
+    protected boolean isDone;
+
+    Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    void markAs(boolean b) {
+        this.isDone = b;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "X" : " ");
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", this.getStatusIcon(), description);
+    }
+}
