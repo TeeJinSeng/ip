@@ -36,7 +36,7 @@ public class ApunableBot {
         //         + "| |_| | |_| |   <  __/\n"
         //         + "|____/ \\__,_|_|\\_\\___|\n";
         
-        String botName = "ApunableBot";
+        String botName = "ApunableBot"; // A pure pineapple bot
 
         ArrayList<Task> tasks = new ArrayList<>();
         String input = "";
@@ -52,7 +52,7 @@ public class ApunableBot {
             System.out.print("Your query:\n");
 
             input = sc.nextLine();
-            inputs = input.split(" ");
+            inputs = input.split(" ", 2);
 
             switch (inputs[0]) {
                 case "bye" -> {
@@ -76,9 +76,31 @@ public class ApunableBot {
                     outputs.add("OK, I've marked this task as not done yet:");
                     outputs.add("  " + tasks.get(index).toString());
                 }
+                case "todo", "event", "deadline" -> {
+                    outputs.add("Got it. I've added this task:");
+                    Task task;
+                    
+                    switch (inputs[0]) {
+                        case "todo" -> task = new Todo(inputs[1]);
+                        case "event" -> {
+                            inputs = inputs[1].split(" /from ");
+                            String desc = inputs[0];
+                            inputs = inputs[1].split(" /to ");
+                            task = new Event(desc, inputs[0], inputs[1]);
+                        }
+                        case "deadline" -> {
+                            inputs = inputs[1].split(" /by ");
+                            task = new Deadline(inputs[0], inputs[1]);
+                        }
+                        default -> task = new Task(input);
+                    }
+                    tasks.add(task);
+
+                    outputs.add("  " + task);
+                    outputs.add(String.format("Now you have %d tasks in the list.", tasks.size()));
+                }
                 default -> {
-                    tasks.add(new Task(input));
-                    outputs.add(String.format("added: %s", input));
+                    outputs.add("I know it sucks to retype due to that little typo, but please retype again :)");
                 }
             }
 
