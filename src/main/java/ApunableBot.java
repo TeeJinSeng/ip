@@ -10,28 +10,33 @@ public class ApunableBot {
         //         + "|____/ \\__,_|_|\\_\\___|\n";
         
         String botName = "ApunableBot";
+        String horizontalLine = "____________________________________________________________";
+
         System.out.println(
             String.format("""
             ____________________________________________________________
             Hello! I'm %s
             What can I do for you?
-            ____________________________________________________________
-            Bye. Hope to see you again soon!
             ____________________________________________________________"""
             , botName)
         );
 
-        // String input = "";
-        // while(!input.equals("bye")) {
-        //     input = sc.nextLine();
-        //     System.out.println("____________________________________________________________");
-        //     if (input.equals("bye")) {
-        //         System.out.println("Bye. Hope to see you again soon!");
-        //     } else {
-        //         System.out.println(input);
-        //     }
-        //     System.out.println("____________________________________________________________");
-        // }
-    
+        String input = "";
+        while(!input.equals("bye")) {
+            System.out.print("Your query:\n");
+            input = sc.nextLine();
+
+            System.out.print("\nReply from bot: \n");
+            System.out.println(horizontalLine);
+            System.out.print("\t");
+
+            if (input.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+            } else {
+                System.out.println(input);
+            }
+
+            System.out.println(horizontalLine);
+        }
     }
 }
