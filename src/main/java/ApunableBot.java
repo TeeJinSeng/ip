@@ -145,15 +145,10 @@ public class ApunableBot {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        // String logo = " ____        _        \n"
-        //         + "|  _ \\ _   _| | _____ \n"
-        //         + "| | | | | | | |/ / _ \\\n"
-        //         + "| |_| | |_| |   <  __/\n"
-        //         + "|____/ \\__,_|_|\\_\\___|\n";
         
         String botName = "ApunableBot"; // A pure pineapple bot
 
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = FileSave.readFromFile();
         String input = "";
         String[] inputs;
         ArrayList<String> outputs = new ArrayList<>();
@@ -180,6 +175,7 @@ public class ApunableBot {
                 case "bye" -> {
                     outputs.add("Bye. Hope to see you again soon!");
                     prettyPrint(outputs);
+                    FileSave.saveToFile(tasks);
                     return;
                 }
                 case "list" -> {
