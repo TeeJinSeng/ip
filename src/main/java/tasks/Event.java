@@ -1,5 +1,6 @@
-public class Event extends Task {
+package tasks;
 
+public class Event extends Task {
     protected String from;
     protected String to;
 
@@ -7,6 +8,11 @@ public class Event extends Task {
         super(description);
         this.from = from;
         this.to = to;
+    }
+
+    @Override
+    public String getFormattedString() {
+        return "E | " + super.getFormattedString() + " | " + from + "-" + to;
     }
 
     @Override

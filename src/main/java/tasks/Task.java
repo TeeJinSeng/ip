@@ -1,3 +1,5 @@
+package tasks;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -7,12 +9,16 @@ public class Task {
         this.isDone = false;
     }
 
-    void markAs(boolean b) {
+    public void markAs(boolean b) {
         this.isDone = b;
     }
 
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
+    }
+
+    public String getFormattedString() {
+        return (isDone ? "1" : "0") + " | " + description;
     }
 
     @Override

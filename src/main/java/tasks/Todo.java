@@ -1,6 +1,13 @@
+package tasks;
+
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
+    }
+
+    @Override
+    public String getFormattedString() {
+        return "T | " + super.getFormattedString();
     }
 
     @Override
