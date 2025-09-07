@@ -1,5 +1,8 @@
 package utils;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import tasks.Deadline;
 import tasks.Event;
 import tasks.ProgramData;
@@ -110,7 +113,7 @@ public class CommandHandler {
      * 
      * @param task the newly added task which the chatbot need to acknowledge its creation. 
      */
-    public static void printAddTaskMsg(Task task) {
+    private static void printAddTaskMsg(Task task) {
         OutputFormatter.outputs.add("Noted. I've added this task:");
         OutputFormatter.outputs.add("  " + task.toString());
         OutputFormatter.outputs.add(String.format("Now you have %d tasks in the list.", ProgramData.tasks.size()));
@@ -140,12 +143,24 @@ public class CommandHandler {
      */
     public static void handleEvent(FormattedInput input) {
         String desc = input.firstParam;
-        String from = input.params.get("from");
-        String to = input.params.get("to");
-        
+
+        String fromStr = input.params.get("from");
+        String toStr = input.params.get("to");
+        System.out.println("fromStr: " + fromStr + " toStr: " + toStr);
+
         if (isNullOrEmpty(desc, "Description", "event")
-            || isNullOrEmpty(from, "From", "event")
-            || isNullOrEmpty(to, "to", "event")) {
+            || isNullOrEmpty(fromStr, "From", "event")
+            || isNullOrEmpty(toStr, "to", "event")) {
+            return;
+        }
+
+        LocalDateTime from;
+        LocalDateTime to;
+
+        from = DateTimeUtil.tryParse(fromStr);
+        to = DateTimeUtil.tryParse(toStr);
+
+        if (from == null || to == null) {
             return;
         }
 
@@ -163,17 +178,18 @@ public class CommandHandler {
     public static void handleDeadline(FormattedInput input) {
         Task task = null;
 
-        if (!input.params.containsKey("by")) {
-            OutputFormatter.outputs.add("/by is missing");
+        String desc = input.firstParam;
+        String byStr = input.params.get("by");
+
+        if (isNullOrEmpty(desc, "Description", "deadline")
+            || isNullOrEmpty(byStr, "by", "deadline")) {
+            return;
         }
 
-        String desc = input.firstParam;
-        String by = input.params.get("by");
+        LocalDateTime by = DateTimeUtil.tryParse(byStr);
 
-        if (desc.isEmpty()) {
-            OutputFormatter.outputs.add("Description for deadline cannot be empty");
-        } else if (by.isEmpty()) {
-            OutputFormatter.outputs.add("by for deadline cannot be empty");
+        if (by == null) {
+            return;
         }
 
         task = new Deadline(desc, by);
@@ -201,6 +217,20 @@ public class CommandHandler {
         OutputFormatter.outputs.add("Noted. I've deleted this task:");
         OutputFormatter.outputs.add("  " + taskToRemove.toString());
         OutputFormatter.outputs.add(String.format("Now you have %d tasks in the list.", ProgramData.tasks.size()));
+        OutputFormatter.flushOutput();
+    }
+
+    public static void handleCheckOccur(FormattedInput input) {
+        LocalDateTime inputDate = DateTimeUtil.tryParse(input.firstParam);
+
+        OutputFormatter.outputs.add("Here are the tasks occuring on this date:");
+
+        List<Task> occuringTasks = ProgramData.tasks.stream().filter(task -> task.isOcurringAt(inputDate)).toList();
+
+        for(int i = 0; i < occuringTasks.size(); i ++) {
+            OutputFormatter.outputs.add(String.format("%d.%s", i + 1, occuringTasks.get(i)));
+        }
+
         OutputFormatter.flushOutput();
     }
 }

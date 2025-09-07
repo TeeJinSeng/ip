@@ -1,11 +1,26 @@
 package tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDateTime by;
 
     public Deadline(String description, String by) {
         super(description);
+        this.by = LocalDateTime.parse(by);
+    }
+
+    public Deadline(String description, LocalDateTime by) {
+        super(description);
         this.by = by;
+    }
+
+    /**
+     * Checks if the Deadline is occuring at the inputDate(i.e. the inputDate is not earlier than {@code by})
+     */
+    public Boolean isOcurringAt(LocalDateTime inputDate) {
+        return !(inputDate.isBefore(by));
     }
 
     @Override
@@ -15,6 +30,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return String.format("[D]%s (by: %s)", super.toString(), 
+            by.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

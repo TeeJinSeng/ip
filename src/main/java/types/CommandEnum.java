@@ -12,7 +12,8 @@ public enum CommandEnum {
     TODO("todo", CommandHandler::handleTodo),
     EVENT("event", CommandHandler::handleEvent),
     DEADLINE("deadline", CommandHandler::handleDeadline),
-    DELETE("delete", CommandHandler::handleDelete);
+    DELETE("delete", CommandHandler::handleDelete),
+    CHECK_OCCUR("check-occur", CommandHandler::handleCheckOccur);
 
     public final String label;
     public final Consumer<FormattedInput> method;
