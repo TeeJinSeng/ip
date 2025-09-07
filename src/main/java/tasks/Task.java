@@ -1,5 +1,7 @@
 package tasks;
 
+import java.time.LocalDateTime;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -7,6 +9,10 @@ public class Task {
     Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public Boolean isOcurringAt(LocalDateTime inputDate) {
+        return null;
     }
 
     public void markAs(boolean b) {

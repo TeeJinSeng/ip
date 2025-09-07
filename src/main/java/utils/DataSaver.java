@@ -66,7 +66,7 @@ public class DataSaver {
         
         while(sc.hasNext()) {
             String formattedString = sc.nextLine();
-            String[] taskInfos = formattedString.split(" \\| ");
+            String[] taskInfos = formattedString.split(" \\| ", 4);
 
             try {
                 switch (taskInfos[0]) {
@@ -77,7 +77,7 @@ public class DataSaver {
                         tasks.add(new Deadline(taskInfos[2], taskInfos[3]));
                     }
                     case "E" -> {
-                        String[] fromTo = taskInfos[3].split("-");
+                        String[] fromTo = taskInfos[3].split(" \\| ");
                         tasks.add(new Event(taskInfos[2], fromTo[0], fromTo[1]));
                     }
                     default -> {
