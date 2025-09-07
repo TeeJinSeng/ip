@@ -1,13 +1,19 @@
+package utils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
-public class FileSave {
+public class DataSaver {
     /**
-     * Saves the tasks into file
+     * Saves the tasks into file.
      * @param tasks list of tasks added by user recently
      */
     public static void saveToFile(ArrayList<Task> tasks) {
@@ -31,9 +37,9 @@ public class FileSave {
     }
 
     /**
-     * Reads the tasks from file
+     * Reads the tasks from file.
      */
-    public static ArrayList<Task> readFromFile() {
+    public static ArrayList<Task> loadFromFile() {
         ArrayList<Task> tasks = new ArrayList<>();
 
         File dataFolder = new File("./data");
