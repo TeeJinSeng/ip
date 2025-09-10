@@ -15,8 +15,12 @@ public class Task {
         return null;
     }
 
-    public void markAs(boolean b) {
-        this.isDone = b;
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
+    public void markAsUndone() {
+        this.isDone = false;
     }
 
     public String getStatusIcon() {

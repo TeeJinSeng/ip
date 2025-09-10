@@ -1,36 +1,52 @@
-import java.util.Scanner;
-import tasks.ProgramData;
-import types.FormattedInput;
-import utils.DataSaver;
-import utils.InputProcessor;
-import utils.OutputFormatter;
+import exceptions.ApunableException;
+import tasks.TaskList;
+import utils.Command;
+import utils.Storage;
+import utils.Parser;
+import utils.Ui;
 
+/**
+ * A Chatbot that only talks about tasks with users.
+ */
 public class ApunableBot {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        
-        String botName = "ApunableBot"; // A pure pineapple bot
 
-        ProgramData.tasks = DataSaver.loadFromFile();
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        OutputFormatter.outputs.add(String.format("Hello! I'm %s", botName));
-        OutputFormatter.outputs.add("What can I do for you?");
-        OutputFormatter.flushOutput();
+    public ApunableBot(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (ApunableException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
 
-        while (true) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                DataSaver.saveToFile(ProgramData.tasks);
-                OutputFormatter.echo("Bye. Hope to see you again soon!");
-                break;
-            }
-
-            FormattedInput formattedInput = InputProcessor.formatInput(input);
-            if (formattedInput != null) {
-                formattedInput.commandType.method.accept(formattedInput);
+    /**
+     * Starts running the chatbot to interact with users(accept inputs, process and produce output). 
+     */
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (ApunableException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
             }
         }
+    }
 
-        sc.close();
+    public static void main(String[] args) {
+        new ApunableBot("data/tasks.txt").run();
     }
 }
