@@ -1,0 +1,32 @@
+package types;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+
+import exceptions.ApunableException;
+import java.util.ArrayList;
+import tasks.Task;
+import tasks.TaskList;
+import utils.DateTimeUtil;
+import utils.Ui;
+
+public class HandlerCheckOccur implements CommandHandler {
+    @Override
+    public void handle(TaskList taskList, Ui ui, String firstParam, HashMap<String, String> params) throws ApunableException {
+        LocalDateTime inputDate = DateTimeUtil.tryParse(firstParam);
+
+        ArrayList<Task> occuringTasks = new ArrayList<>();
+
+        for(int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).isOcurringAt(inputDate)) {
+                occuringTasks.add(taskList.get(i));
+            }
+        }
+
+        ui.echo("Here are the tasks occuring on this date:");
+
+        for(int i = 0; i < occuringTasks.size(); i ++) {
+            ui.echo(String.format("%d.%s", i + 1, occuringTasks.get(i)));
+        }
+    }
+}
