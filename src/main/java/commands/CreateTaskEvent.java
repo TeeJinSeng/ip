@@ -1,4 +1,4 @@
-package types;
+package commands;
 
 import java.util.HashMap;
 import java.time.LocalDateTime;
@@ -20,12 +20,11 @@ public class CreateTaskEvent extends CreateTaskHandler {
 
         String desc = firstParam;
 
-        String fromStr = params.get("from");
-        String toStr = params.get("to");
-        System.out.println("fromStr: " + fromStr + " toStr: " + toStr);
+        String fromStr = params.getOrDefault("from", "");
+        String toStr = params.getOrDefault("to", "");
 
         if (desc.isEmpty() || fromStr.isEmpty() || toStr.isEmpty()) {
-            throw new ApunableException("Missing arguments");
+            throw new ApunableException("Missing arguments(description, /from or /to)");
         }
 
         LocalDateTime from;

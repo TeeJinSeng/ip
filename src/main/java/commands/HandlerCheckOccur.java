@@ -1,4 +1,4 @@
-package types;
+package commands;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

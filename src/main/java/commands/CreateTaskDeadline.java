@@ -1,4 +1,4 @@
-package types;
+package commands;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -20,10 +20,10 @@ public class CreateTaskDeadline extends CreateTaskHandler {
         Task task = null;
 
         String desc = firstParam;
-        String byStr = params.get("by");
+        String byStr = params.getOrDefault("by", "");
 
         if (desc.isEmpty() || byStr.isEmpty()) {
-            throw new ApunableException("Missing arguments");
+            throw new ApunableException("Missing arguments(description or /by)");
         }
 
         LocalDateTime by = DateTimeUtil.tryParse(byStr);

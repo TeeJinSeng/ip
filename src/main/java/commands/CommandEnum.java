@@ -1,4 +1,4 @@
-package types;
+package commands;
 
 import java.util.HashMap;
 import java.util.Map;
