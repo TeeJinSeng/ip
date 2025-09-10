@@ -1,9 +1,9 @@
 package utils;
 import java.util.HashMap;
 
+import commands.CommandEnum;
 import tasks.Task;
 import tasks.TaskList;
-import types.CommandEnum;
 import exceptions.ApunableException;
 
 public class Command {

@@ -1,4 +1,4 @@
-package types;
+package commands;
 
 import utils.Ui;
 import utils.Storage;

@@ -1,8 +1,9 @@
 package utils;
 
-import types.CommandEnum;
 import exceptions.ApunableException;
 import java.util.HashMap;
+
+import commands.CommandEnum;
 
 public class Parser {
     /**
