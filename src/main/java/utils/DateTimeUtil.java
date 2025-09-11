@@ -43,14 +43,14 @@ public class DateTimeUtil {
             String[] dayMonthYear = dateStr.split("[/-]");
             String[] hourMinute = timeStr.split(":");
 
-            if (dayMonthYear[2].length() == 4 || dayMonthYear[0].length() == 1) {
-                day = Integer.parseInt(dayMonthYear[0]);
-                month = Integer.parseInt(dayMonthYear[1]);
-                year = toFourDigitsYear(dayMonthYear[2]);
-            } else {
+            if (dayMonthYear[0].length() == 4 || dayMonthYear[2].length() == 1) {
                 day = Integer.parseInt(dayMonthYear[2]);
                 month = Integer.parseInt(dayMonthYear[1]);
                 year = toFourDigitsYear(dayMonthYear[0]);
+            } else {
+                day = Integer.parseInt(dayMonthYear[0]);
+                month = Integer.parseInt(dayMonthYear[1]);
+                year = toFourDigitsYear(dayMonthYear[2]);
             }
 
             if (hourMinute.length == 1) {
