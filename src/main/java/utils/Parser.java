@@ -1,9 +1,9 @@
 package utils;
 
-import exceptions.ApunableException;
 import java.util.HashMap;
 
 import commands.CommandEnum;
+import exceptions.ApunableException;
 
 public class Parser {
     /**
@@ -27,7 +27,7 @@ public class Parser {
         if (temp.length >= 2) {
             // split based on slash that followed by an alphabet
             temp = temp[1].trim().split("/(?=[a-zA-Z])", 2);
-            firstParam = temp[0];
+            firstParam = temp[0].trim();
 
             if (temp.length >= 2) {
                 // split based on slash that followed by an alphabet

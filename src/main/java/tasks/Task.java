@@ -11,6 +11,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public Boolean isOcurringAt(LocalDateTime inputDate) {
         return null;
     }
