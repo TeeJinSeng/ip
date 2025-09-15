@@ -2,8 +2,8 @@ package utils;
 import java.util.HashMap;
 
 import commands.CommandEnum;
-import tasks.TaskList;
 import exceptions.ApunableException;
+import tasks.TaskList;
 
 public class Command {
     private CommandEnum commandType;
@@ -27,10 +27,13 @@ public class Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ApunableException {
         if (commandType == CommandEnum.BYE) {
-            ui.echo("Bye. Hope to see you again soon!");
-            ui.close();
-            storage.save(tasks);
-            isExitAfter = true;
+            try {
+                ui.echo("Bye. Hope to see you again soon!");
+                isExitAfter = true;
+                storage.save(tasks);
+            } catch (ApunableException ex) {
+                ui.echo(ex.getMessage());
+            }
         } else {
             commandType.handler.handle(tasks, ui, firstParam, params);
         }

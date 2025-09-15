@@ -33,6 +33,7 @@ application {
 
 shadowJar {
     archiveBaseName = "apunable"
+    archiveFileName = 'apunable-0.1.jar'
     archiveClassifier = null
 }
 
