@@ -5,6 +5,9 @@ import commands.CommandEnum;
 import exceptions.ApunableException;
 import tasks.TaskList;
 
+/**
+ * A class that stores the info extracted from user input. 
+ */
 public class Command {
     private CommandEnum commandType;
     private String firstParam;
@@ -21,10 +24,16 @@ public class Command {
         this.params = params;
     }
 
+    /**
+     * Returns if this is an exit command, if yes the program will terminate after this command. 
+     */
     public boolean isExit() {
         return isExitAfter;
     }
 
+    /**
+     * Executes the command. 
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ApunableException {
         if (commandType == CommandEnum.BYE) {
             try {

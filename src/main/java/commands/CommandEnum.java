@@ -3,6 +3,9 @@ package commands;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Stores all the available commands of the Chatbot and its handlers
+ */
 public enum CommandEnum {
     LIST("list", new HandlerList()),
     MARK("mark", new HandlerMark()),
@@ -22,11 +25,18 @@ public enum CommandEnum {
         this.handler = handler;
     }
 
+    /**
+     * Handles the case specifically for {@code bye} command.
+     * @param label
+     */
     private CommandEnum(String label) {
         this.label = label;
-        this.handler = new HandlerList(); // Just assign a random handler
+        this.handler = new HandlerList();
     }
 
+    /**
+     * A lookup table that will be used by {@code fromString} method. 
+     */
     private static final Map<String, CommandEnum> LOOKUP = new HashMap<>();
 
     static {
@@ -35,6 +45,11 @@ public enum CommandEnum {
         }
     }
 
+    /**
+     * Finds the field that match the String {@code label}.
+     * @param label String to find
+     * @return a CommandEnum field which label match the input string {@code label}
+     */
     public static CommandEnum fromString(String label) {
         return LOOKUP.get(label);
     }

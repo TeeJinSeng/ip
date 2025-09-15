@@ -4,7 +4,15 @@ import java.time.LocalDateTime;
 
 import exceptions.ApunableException;
 
+/**
+ * A util that help to parse from {@code String} into {@code LocalDateTime}. 
+ */
 public class DateTimeUtil {
+    /**
+     * Converts a 2-digits years(e.g. "25") into a 4-digits year(e.g. "2025")
+     * @param yearStr the 2-digits year string
+     * @return the converted 4-digits year string
+     */
     private static int toFourDigitsYear(String yearStr) {
         if (yearStr.length() == 2) {
             int year = Integer.parseInt(yearStr);

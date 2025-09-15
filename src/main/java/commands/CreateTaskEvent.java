@@ -1,18 +1,15 @@
 package commands;
 
-import java.util.HashMap;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
-import utils.DateTimeUtil;
-import tasks.Task;
-import tasks.Event;
-import tasks.TaskList;
 import exceptions.ApunableException;
+import tasks.Event;
+import tasks.Task;
+import utils.DateTimeUtil;
 
 /**
  * Handles the event command from user and add a new {@code Event} task. 
- * 
- * @param input formatted user input
  */
 public class CreateTaskEvent extends CreateTaskHandler {
     @Override

@@ -5,13 +5,10 @@ import java.util.HashMap;
 import exceptions.ApunableException;
 import tasks.Task;
 import tasks.TaskList;
-import utils.Command;
 import utils.Ui;
 
 /**
  * Handles the {@code delete <index>} command from user and delete a task based on provided index. 
- * 
- * @param input formatted user input
  */
 public class HandlerDelete implements CommandHandler {
     @Override
