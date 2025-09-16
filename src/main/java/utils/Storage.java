@@ -6,13 +6,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import exceptions.ApunableException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
-import tasks.Todo;
 import tasks.TaskList;
-import exceptions.ApunableException;
+import tasks.Todo;
 
+/**
+ * A util that handles storing and loading tasks from and to a provided {@code filePath}. 
+ */
 public class Storage {
     private final String filePath;
 

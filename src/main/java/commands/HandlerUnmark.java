@@ -2,14 +2,12 @@ package commands;
 
 import java.util.HashMap;
 
-import utils.Ui;
-import tasks.TaskList;
 import exceptions.ApunableException;
+import tasks.TaskList;
+import utils.Ui;
 
 /**
  * Handles the unmark command from user. 
- * 
- * @param input formatted user input
  */
 public class HandlerUnmark implements CommandHandler {
     @Override

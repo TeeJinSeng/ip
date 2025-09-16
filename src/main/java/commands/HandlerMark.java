@@ -1,16 +1,13 @@
 package commands;
 
-import utils.Ui;
-import tasks.TaskList;
-
 import java.util.HashMap;
 
 import exceptions.ApunableException;
+import tasks.TaskList;
+import utils.Ui;
 
 /**
  * Handles the mark command from user. 
- * 
- * @param input formatted user input
  */
 public class HandlerMark implements CommandHandler {
     @Override

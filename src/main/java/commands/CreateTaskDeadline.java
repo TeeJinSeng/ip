@@ -6,13 +6,10 @@ import java.util.HashMap;
 import exceptions.ApunableException;
 import tasks.Deadline;
 import tasks.Task;
-import tasks.TaskList;
 import utils.DateTimeUtil;
 
 /**
  * Handles the deadline command from user and add a new {@code Deadline} task. 
- * 
- * @param input formatted user input
  */
 public class CreateTaskDeadline extends CreateTaskHandler {
     @Override

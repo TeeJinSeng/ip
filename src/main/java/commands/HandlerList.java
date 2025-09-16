@@ -1,16 +1,13 @@
 package commands;
 
-import utils.Ui;
-import tasks.TaskList;
-
 import java.util.HashMap;
 
 import exceptions.ApunableException;
+import tasks.TaskList;
+import utils.Ui;
 
 /**
  * Handles the list command from user and list out all the added tasks. 
- * 
- * @param input formatted user input
  */
 public class HandlerList implements CommandHandler {
     @Override

@@ -2,14 +2,12 @@ package commands;
 
 import java.util.HashMap;
 
+import exceptions.ApunableException;
 import tasks.Task;
 import tasks.Todo;
-import exceptions.ApunableException;
 
 /**
  * Handles the todo command from user and add a new {@code Todo} task. 
- * 
- * @param input formatted user input
  */
 public class HandlerTodo extends CreateTaskHandler {
     @Override

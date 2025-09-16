@@ -1,16 +1,19 @@
 package utils;
 
-import exceptions.ApunableException;
 import java.util.HashMap;
 
 import commands.CommandEnum;
+import exceptions.ApunableException;
 
+/**
+ * A util that parses user input into {@code Command} type. 
+ */
 public class Parser {
     /**
-     * Normalizes and fits the user input into {@code FormattedInput}, easier for further process. 
+     * Normalizes and parses the user input into {@code Command}, easier for further process. 
      * 
      * @param input user input
-     * @return a {@code FormattedInput} instance consists of command type, parameter names and parameters
+     * @return a {@code Command} instance consists of command type, parameter names and parameters
      */
     public static Command parse(String input) throws ApunableException {
         String[] temp = input.trim().split(" ", 2);
