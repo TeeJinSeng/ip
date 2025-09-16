@@ -31,6 +31,16 @@ public class Storage {
      */
     public void save(TaskList tasks) throws ApunableException {
         File dataFile = new File(FILE_PATH);
+
+        // Ensure parent directories exist
+        File parentDirectory = dataFile.getParentFile();
+        if (parentDirectory != null && !parentDirectory.exists()) {
+            boolean isDirectoriesCreated = parentDirectory.mkdirs();
+            if (!isDirectoriesCreated) {
+                throw new ApunableException("Failed to create parent directories for file: " + FILE_PATH);
+            }
+        }
+
         try {
             dataFile.createNewFile();
         } catch (IOException e) {

@@ -1,5 +1,7 @@
 package apunable.ui;
 
+import javafx.application.Platform;
+
 import exceptions.ApunableException;
 import tasks.TaskList;
 import utils.Command;
@@ -32,6 +34,10 @@ public class ApunableBot {
         }
     }
 
+    public ApunableBot() {
+        this("data/tasks.txt");
+    }
+
     /**
      * Starts running the chatbot to interact with users(accept inputs, process and produce output). 
      */
@@ -55,5 +61,31 @@ public class ApunableBot {
 
     public static void main(String[] args) {
         new ApunableBot("data/tasks.txt").run();
+    }
+
+    /**
+     * Returns welcome message. 
+     */
+    public String getWelcomeMessage() {
+        ui.showWelcome();
+        return ui.getOutput();
+    }
+    
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            if (c.isExit()) {
+                Platform.runLater(Platform::exit);
+            }
+
+            return ui.getOutput();
+        } catch (ApunableException e) {
+            ui.showError(e.getMessage());
+            return ui.getOutput();
+        }
     }
 }
