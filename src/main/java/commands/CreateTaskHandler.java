@@ -27,6 +27,7 @@ public abstract class CreateTaskHandler implements CommandHandler {
 
     /**
      * Creates a new task based on the given parameters and return it. the parameters are same as the one in {@code handle} method. 
+     * 
      * @return created task. 
      */
     public abstract Task createTask(String firstParam, HashMap<String, String> params) throws ApunableException;

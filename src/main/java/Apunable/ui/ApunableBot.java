@@ -17,8 +17,9 @@ public class ApunableBot {
     private Ui ui;
 
     /**
-     * Initializes a new Chatbot instance and load tasklist from {@code filePath}
-     * @param filePath path to file that store tasklist
+     * Initializes a new Chatbot instance and load tasklist from {@code filePath}. 
+     * 
+     * @param filePath path to file that store tasklist. 
      */
     public ApunableBot(String filePath) {
         ui = new Ui();

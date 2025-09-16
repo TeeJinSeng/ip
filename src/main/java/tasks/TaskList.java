@@ -34,7 +34,6 @@ public class TaskList {
 
     /**
      * Adds a new task into this {@code taskList}. 
-     * . 
      * 
      * @param task task to be added. 
      */
@@ -45,7 +44,7 @@ public class TaskList {
     /**
      * Removes a task from this {@code taskList}. 
      * 
-     * @param index index of task to be removed
+     * @param index index of task to be removed. 
      */
     public void remove(int index) {
         tasks.remove(index);

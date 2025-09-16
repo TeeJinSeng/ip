@@ -30,7 +30,7 @@ public class Ui {
     }
 
     /**
-     * Shows welcome message to the users at the start
+     * Shows welcome message to the users at the start. 
      */
     public void showWelcome() {
         final String BOT_NAME = "ApunableBot"; // A pure pineapple bot
@@ -50,7 +50,8 @@ public class Ui {
 
     /**
      * Shows the error message if some exception is thrown. 
-     * @param message the exception message
+     * 
+     * @param message the exception message. 
      */
     public void showError(String message) {
         System.out.println("Error: " + message);
@@ -58,7 +59,6 @@ public class Ui {
 
     /**
      * Reads user commands from {@code System.in}. 
-     * @return
      */
     public String readCommand() {
         String command = sc.nextLine();

@@ -11,10 +11,15 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Checks if current task is occuring at {@code inputDate}, or return {@code null} if not applicable. 
-     * @param inputDate user input date
-     * @return whether current task is occuring at the provided date, or {@code null} if not applicable
+     * 
+     * @param inputDate user input date. 
+     * @return whether current task is occuring at the provided date, or {@code null} if not applicable. 
      */
     public Boolean isOcurringAt(LocalDateTime inputDate) {
         return null;
@@ -36,7 +41,8 @@ public class Task {
 
     /**
      * Returns status icon indicate whether this task is marked as done or undone. 
-     * @return {@code "X"} if the task is marked as done, or {@code " "} otherwise
+     * 
+     * @return {@code "X"} if the task is marked as done, or {@code " "} otherwise. 
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");

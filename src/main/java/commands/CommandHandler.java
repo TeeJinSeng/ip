@@ -12,6 +12,7 @@ import utils.Ui;
 public interface CommandHandler {
     /**
      * Handles the command typed by users. 
+     * 
      * @param taskList a reference of taskList instance provided so commands involving adding tasks can modify it directly. 
      * @param ui a ui that receive user input and return output, provided by other parts of code. 
      * @param firstParam the first parameter of the command(the one follow immediately after the command type). 
