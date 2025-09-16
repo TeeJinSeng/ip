@@ -33,6 +33,10 @@ public class MainWindow extends AnchorPane {
     /** Injects the Apunable instance */
     public void setApunable(ApunableBot d) {
         apunable = d;
+
+        dialogContainer.getChildren().add(
+                DialogBox.getApunableDialog(apunable.getWelcomeMessage(), apunableImage)
+        );
     }
 
     /**

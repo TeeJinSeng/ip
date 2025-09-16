@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -7,18 +8,32 @@ import java.util.Scanner;
  */
 public class Ui {
     Scanner sc;
+    ArrayList<String> outputs;
 
     public Ui() {
         sc = new Scanner(System.in);
+        outputs = new ArrayList<>();
     }
 
     /**
-     * Echos the {@code message} to the chatbot user.
+     * Returns the string that would have been printed out in console. 
+     */
+    public String getOutput() {
+        String response = String.join("\n", outputs);
+        outputs.clear();
+
+        return response;
+    }
+
+    /**
+     * Records the outputs that would have been printed out. 
+     * Was used by text based UI to echo the {@code message} to the chatbot user.
      * 
      * @param message message to be printed out by chatbot to the user.
      */
     public void echo(String message) {
-        System.out.println("\t" + message);
+        // System.out.println("\t" + message);
+        outputs.add(message);
     }
 
     /**
@@ -45,7 +60,7 @@ public class Ui {
      * Shows error indicating the failure to load tasks from file. 
      */
     public void showLoadingError() {
-        System.out.println("Failed to load tasks from file");
+        echo("Failed to load tasks from file");
     }
 
     /**
@@ -54,7 +69,7 @@ public class Ui {
      * @param message the exception message. 
      */
     public void showError(String message) {
-        System.out.println("Error: " + message);
+        echo("Error: " + message);
     }
 
     /**

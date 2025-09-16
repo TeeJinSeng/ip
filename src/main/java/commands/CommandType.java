@@ -12,6 +12,7 @@ public enum CommandType {
     EVENT("event", new CreateTaskEvent()),
     DEADLINE("deadline", new CreateTaskDeadline()),
     CHECK_OCCUR("check-occur", new HandlerCheckOccur()),
+    FIND("find", new HandlerFind()),
     BYE("bye");
 
     private final String LABEL;
