@@ -14,7 +14,6 @@ import utils.DateTimeUtil;
 public class CreateTaskEvent extends CreateTaskHandler {
     @Override
     public Task createTask(String firstParam, HashMap<String, String> params) throws ApunableException {
-
         String desc = firstParam;
 
         String fromStr = params.getOrDefault("from", "");

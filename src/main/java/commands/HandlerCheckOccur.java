@@ -15,7 +15,8 @@ import utils.Ui;
  */
 public class HandlerCheckOccur implements CommandHandler {
     @Override
-    public void handle(TaskList taskList, Ui ui, String firstParam, HashMap<String, String> params) throws ApunableException {
+    public void handle(TaskList taskList, Ui ui, 
+            String firstParam, HashMap<String, String> params) throws ApunableException {
         LocalDateTime inputDate = DateTimeUtil.tryParse(firstParam);
 
         ArrayList<Task> occuringTasks = new ArrayList<>();

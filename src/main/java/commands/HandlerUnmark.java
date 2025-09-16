@@ -11,7 +11,8 @@ import utils.Ui;
  */
 public class HandlerUnmark implements CommandHandler {
     @Override
-    public void handle(TaskList taskList, Ui ui, String firstParam, HashMap<String, String> params) throws ApunableException {
+    public void handle(TaskList taskList, Ui ui, 
+            String firstParam, HashMap<String, String> params) throws ApunableException {
         try {
             int index = Integer.parseInt(firstParam) - 1;
 

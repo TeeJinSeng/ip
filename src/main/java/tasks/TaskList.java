@@ -19,7 +19,7 @@ public class TaskList {
     /**
      * Returns the task at specific 0-based {@code index}. 
      * 
-     * @param index index of the task to be retrieved(0-based)
+     * @param index index of the task to be retrieved(0-based). 
      */
     public Task get(int index) {
         return tasks.get(index);
@@ -34,8 +34,9 @@ public class TaskList {
 
     /**
      * Adds a new task into this {@code taskList}. 
+     * . 
      * 
-     * @param task task to be added
+     * @param task task to be added. 
      */
     public void add(Task task) {
         tasks.add(task);

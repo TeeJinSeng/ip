@@ -14,8 +14,6 @@ import utils.DateTimeUtil;
 public class CreateTaskDeadline extends CreateTaskHandler {
     @Override
     public Task createTask(String firstParam, HashMap<String, String> params) throws ApunableException {
-        Task task = null;
-
         String desc = firstParam;
         String byStr = params.getOrDefault("by", "");
 

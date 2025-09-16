@@ -1,7 +1,8 @@
 package utils;
+
 import java.util.HashMap;
 
-import commands.CommandEnum;
+import commands.CommandType;
 import exceptions.ApunableException;
 import tasks.TaskList;
 
@@ -9,7 +10,7 @@ import tasks.TaskList;
  * A class that stores the info extracted from user input. 
  */
 public class Command {
-    private CommandEnum commandType;
+    private CommandType commandType;
     private String firstParam;
     private HashMap<String, String> params;
     private boolean isExitAfter;
@@ -18,7 +19,7 @@ public class Command {
         params = new HashMap<>();
     }
 
-    public Command(CommandEnum cmd, String fstParam, HashMap<String, String> params) {
+    public Command(CommandType cmd, String fstParam, HashMap<String, String> params) {
         commandType = cmd;
         firstParam = fstParam;
         this.params = params;
@@ -35,7 +36,7 @@ public class Command {
      * Executes the command. 
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ApunableException {
-        if (commandType == CommandEnum.BYE) {
+        if (commandType == CommandType.BYE) {
             try {
                 ui.echo("Bye. Hope to see you again soon!");
                 isExitAfter = true;
@@ -44,7 +45,7 @@ public class Command {
                 ui.echo(ex.getMessage());
             }
         } else {
-            commandType.handler.handle(tasks, ui, firstParam, params);
+            commandType.getHandler().handle(tasks, ui, firstParam, params);
         }
     }
 }
