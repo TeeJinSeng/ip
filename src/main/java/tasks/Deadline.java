@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Task with deadline
+ * Task with deadline. 
  */
 public class Deadline extends Task {
     protected LocalDateTime by;
@@ -20,8 +20,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Checks if the Deadline is occuring at the inputDate(i.e. the inputDate is not earlier than {@code by})
+     * Checks if the Deadline is occuring at the inputDate(i.e. the inputDate is not earlier than {@code by}). 
      */
+    @Override
     public Boolean isOcurringAt(LocalDateTime inputDate) {
         return !(inputDate.isBefore(by));
     }

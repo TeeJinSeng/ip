@@ -6,7 +6,6 @@ import java.util.HashMap;
 import exceptions.ApunableException;
 import tasks.Deadline;
 import tasks.Task;
-import tasks.TaskList;
 import utils.DateTimeUtil;
 
 /**
@@ -17,8 +16,6 @@ import utils.DateTimeUtil;
 public class CreateTaskDeadline extends CreateTaskHandler {
     @Override
     public Task createTask(String firstParam, HashMap<String, String> params) throws ApunableException {
-        Task task = null;
-
         String desc = firstParam;
         String byStr = params.getOrDefault("by", "");
 

@@ -1,22 +1,22 @@
 package utils;
 
-import exceptions.ApunableException;
 import java.util.HashMap;
 
-import commands.CommandEnum;
+import commands.CommandType;
+import exceptions.ApunableException;
 
 public class Parser {
     /**
      * Normalizes and fits the user input into {@code FormattedInput}, easier for further process. 
      * 
-     * @param input user input
-     * @return a {@code FormattedInput} instance consists of command type, parameter names and parameters
+     * @param input user input. 
+     * @return a {@code FormattedInput} instance consists of command type, parameter names and parameters. 
      */
     public static Command parse(String input) throws ApunableException {
         String[] temp = input.trim().split(" ", 2);
 
         String commandType = temp[0];
-        CommandEnum cmd = CommandEnum.fromString(commandType);
+        CommandType cmd = CommandType.fromString(commandType);
         if (cmd == null) {
             throw new ApunableException("Invalid command");
         }

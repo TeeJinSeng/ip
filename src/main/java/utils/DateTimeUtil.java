@@ -1,6 +1,8 @@
 package utils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import exceptions.ApunableException;
 
@@ -17,10 +19,60 @@ public class DateTimeUtil {
     }
 
     /**
-     * Parses {@code dateTimeStr} into a {@code LocalDateTime} object, as {@code LocalDateTime.parse} handle too little cases.
+     * Parses {@code dateStr} into a {@code LocalDate} object, used by the {@code tryParse} method. 
      * 
-     * @param dateTimeStr string that is going to be parsed
-     * @return a {@code LocalDateTime} object
+     * @param dateStr string that is going to be parsed. 
+     * @return a {@code LocalDate} object. 
+     */
+    private static LocalDate parseDate(String dateStr) {
+        String[] dayMonthYear = dateStr.split("[/-]");
+
+        int day;
+        int month;
+        int year;
+
+        if (dayMonthYear[0].length() == 4 || dayMonthYear[2].length() == 1) {
+            day = Integer.parseInt(dayMonthYear[2]);
+            month = Integer.parseInt(dayMonthYear[1]);
+            year = toFourDigitsYear(dayMonthYear[0]);
+        } else {
+            day = Integer.parseInt(dayMonthYear[0]);
+            month = Integer.parseInt(dayMonthYear[1]);
+            year = toFourDigitsYear(dayMonthYear[2]);
+        }
+
+        return LocalDate.of(year, month, day);
+    }
+
+    /**
+     * Parses {@code timeStr} into a {@code LocalTime} object, used by the {@code tryParse} method. 
+     * 
+     * @param timeStr string that is going to be parsed. 
+     * @return a {@code LocalTime} object. 
+     */
+    private static LocalTime parseTime(String timeStr) {
+        int hour;
+        int minute;
+
+        String[] hourMinute = timeStr.split(":");
+
+        if (hourMinute.length == 1) {
+            hour = Integer.parseInt(timeStr.substring(0, 2));
+            minute = Integer.parseInt(timeStr.substring(2, 4));
+        } else {
+            hour = Integer.parseInt(hourMinute[0]);
+            minute = Integer.parseInt(hourMinute[1]);
+        }
+
+        return LocalTime.of(hour, minute);
+    }
+
+    /**
+     * Parses {@code dateTimeStr} into a {@code LocalDateTime} object, 
+     * as {@code LocalDateTime.parse} handle too little cases.
+     * 
+     * @param dateTimeStr string that is going to be parsed. 
+     * @return a {@code LocalDateTime} object. 
      */
     public static LocalDateTime tryParse(String dateTimeStr) throws ApunableException {
         try {
@@ -34,34 +86,10 @@ public class DateTimeUtil {
                 timeStr = dateTimeStr.split("[ T]")[1];
             }
 
-            int day;
-            int month;
-            int year;
-            int hour;
-            int minute;
+            LocalDate date = parseDate(dateStr);
+            LocalTime time = parseTime(timeStr);
 
-            String[] dayMonthYear = dateStr.split("[/-]");
-            String[] hourMinute = timeStr.split(":");
-
-            if (dayMonthYear[0].length() == 4 || dayMonthYear[2].length() == 1) {
-                day = Integer.parseInt(dayMonthYear[2]);
-                month = Integer.parseInt(dayMonthYear[1]);
-                year = toFourDigitsYear(dayMonthYear[0]);
-            } else {
-                day = Integer.parseInt(dayMonthYear[0]);
-                month = Integer.parseInt(dayMonthYear[1]);
-                year = toFourDigitsYear(dayMonthYear[2]);
-            }
-
-            if (hourMinute.length == 1) {
-                hour = Integer.parseInt(timeStr.substring(0, 2));
-                minute = Integer.parseInt(timeStr.substring(2, 4));
-            } else {
-                hour = Integer.parseInt(hourMinute[0]);
-                minute = Integer.parseInt(hourMinute[1]);
-            }
-
-            return LocalDateTime.of(year, month, day, hour, minute);
+            return LocalDateTime.of(date, time);
         } catch (IndexOutOfBoundsException e) {
             throw new ApunableException("Invalid date time format");
         } catch (NumberFormatException e) {

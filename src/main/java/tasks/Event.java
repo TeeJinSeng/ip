@@ -20,8 +20,10 @@ public class Event extends Task {
     }
 
     /**
-     * Checks if the Event is occuring at the inputDate(i.e. the inputDate is not earlier than {@code from}, and is not after than {@code to})
+     * Checks if the Event is occuring at the inputDate(i.e. the inputDate 
+     * is not earlier than {@code from}, and is not after than {@code to}). 
      */
+    @Override
     public Boolean isOcurringAt(LocalDateTime inputDate) {
         return !(inputDate.isBefore(from) | inputDate.isAfter(to));
     }

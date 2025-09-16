@@ -1,16 +1,15 @@
 package commands;
 
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
 
 import exceptions.ApunableException;
 import tasks.Task;
-import tasks.Todo;
 import tasks.TaskList;
+import tasks.Todo;
 import utils.Ui;
 
 public class HandlerDeleteTest {

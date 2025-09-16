@@ -1,13 +1,11 @@
 package utils;
 
-// import utils.Parser;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.lang.reflect.Field;
 
-import commands.CommandEnum;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import commands.CommandType;
 
 public class ParserTest {
     @Test
@@ -17,7 +15,7 @@ public class ParserTest {
 
             Field commandField = Command.class.getDeclaredField("commandType");
             commandField.setAccessible(true);
-            assertEquals(CommandEnum.TODO, commandField.get(cmd));
+            assertEquals(CommandType.TODO, commandField.get(cmd));
 
             Field descField = Command.class.getDeclaredField("firstParam");
             descField.setAccessible(true);

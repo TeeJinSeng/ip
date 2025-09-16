@@ -14,24 +14,25 @@ public class TaskList {
     }
 
     /**
-     * Returns the task at specific 0-based {@code index}
+     * Returns the task at specific 0-based {@code index}. 
      * 
-     * @param index index of the task to get(1-based)
+     * @param index index of the task to get(1-based). 
      */
     public Task get(int index) {
         return tasks.get(index);
     }
 
     /**
-     * @return the size of {@code taskList}
+     * @return the size of {@code taskList}. 
      */
     public int size() {
         return tasks.size();
     }
 
     /**
-     * Add a new task into taskList
-     * @param task task to be added
+     * Add a new task into taskList. 
+     * 
+     * @param task task to be added. 
      */
     public void add(Task task) {
         tasks.add(task);

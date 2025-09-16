@@ -1,10 +1,10 @@
 package commands;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
-import java.util.ArrayList;
 import tasks.Task;
 import tasks.TaskList;
 import utils.DateTimeUtil;
@@ -12,7 +12,8 @@ import utils.Ui;
 
 public class HandlerCheckOccur implements CommandHandler {
     @Override
-    public void handle(TaskList taskList, Ui ui, String firstParam, HashMap<String, String> params) throws ApunableException {
+    public void handle(TaskList taskList, Ui ui, 
+            String firstParam, HashMap<String, String> params) throws ApunableException {
         LocalDateTime inputDate = DateTimeUtil.tryParse(firstParam);
 
         ArrayList<Task> occuringTasks = new ArrayList<>();

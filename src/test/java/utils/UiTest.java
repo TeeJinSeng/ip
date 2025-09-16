@@ -1,8 +1,10 @@
 package utils;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import java.io.*;
 
 public class UiTest {
     Ui ui = new Ui();

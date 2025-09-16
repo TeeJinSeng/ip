@@ -6,26 +6,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import exceptions.ApunableException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
-import tasks.Todo;
 import tasks.TaskList;
-import exceptions.ApunableException;
+import tasks.Todo;
 
 public class Storage {
-    private final String filePath;
+    private final String FILE_PATH;
 
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.FILE_PATH = filePath;
     }
 
     /**
      * Saves the tasks into file.
-     * @param tasks list of tasks added by user recently
+     * 
+     * @param tasks list of tasks added by user recently. 
      */
     public void save(TaskList tasks) throws ApunableException {
-        File dataFile = new File(filePath);
+        File dataFile = new File(FILE_PATH);
         try {
             dataFile.createNewFile();
         } catch (IOException e) {
@@ -43,13 +45,40 @@ public class Storage {
         }
     }
 
+    private Task createTaskFromString(String formattedString, int lineNum) throws ApunableException {
+        String[] taskInfos = formattedString.split(" \\| ", 4);
+        Task task = null;
+
+        switch (taskInfos[0]) {
+            case "T" -> {
+                task = new Todo(taskInfos[2]);
+            }
+            case "D" -> {
+                task = new Deadline(taskInfos[2], taskInfos[3]);
+            }
+            case "E" -> {
+                String[] fromTo = taskInfos[3].split(" \\| ");
+                task = new Event(taskInfos[2], fromTo[0], fromTo[1]);
+            }
+            default -> {
+                throw new ApunableException("Wrong format at line " + lineNum);
+            }
+        }
+
+        if (task != null && taskInfos[1].equals("1")) {
+            task.markAsDone();
+        }
+
+        return task;
+    }
+
     /**
-     * Loads the tasks from {@code filePath} specified.
+     * Loads the tasks from {@code FILE_PATH} specified.
      */
     public ArrayList<Task> load() throws ApunableException {
         ArrayList<Task> tasks = new ArrayList<>();
 
-        File dataFile = new File(filePath);
+        File dataFile = new File(FILE_PATH);
         Scanner sc;
         try {
             sc = new Scanner(dataFile);
@@ -60,29 +89,7 @@ public class Storage {
         try {
             while(sc.hasNext()) {
                 String formattedString = sc.nextLine();
-                String[] taskInfos = formattedString.split(" \\| ", 4);
-
-            
-                switch (taskInfos[0]) {
-                    case "T" -> {
-                        tasks.add(new Todo(taskInfos[2]));
-                    }
-                    case "D" -> {
-                        tasks.add(new Deadline(taskInfos[2], taskInfos[3]));
-                    }
-                    case "E" -> {
-                        String[] fromTo = taskInfos[3].split(" \\| ");
-                        tasks.add(new Event(taskInfos[2], fromTo[0], fromTo[1]));
-                    }
-                    default -> {
-                        sc.close();
-                        throw new ApunableException("Wrong format at line " + (tasks.size()+1));
-                    }
-                }
-
-                if (taskInfos[1].equals("1")) {
-                    tasks.get(tasks.size() - 1).markAsDone();
-                }
+                tasks.add(createTaskFromString(formattedString, tasks.size() + 1));
             }
         } catch (IndexOutOfBoundsException e) {
             throw new ApunableException(String.format("Wrong format at line %d, message: %s", 

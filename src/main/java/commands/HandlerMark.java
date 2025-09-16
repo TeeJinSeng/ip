@@ -1,20 +1,20 @@
 package commands;
 
-import utils.Ui;
-import tasks.TaskList;
-
 import java.util.HashMap;
 
 import exceptions.ApunableException;
+import tasks.TaskList;
+import utils.Ui;
 
 /**
  * Handles the mark command from user. 
  * 
- * @param input formatted user input
+ * @param input formatted user input. 
  */
 public class HandlerMark implements CommandHandler {
     @Override
-    public void handle(TaskList taskList, Ui ui, String firstParam, HashMap<String, String> params) throws ApunableException {
+    public void handle(TaskList taskList, Ui ui, 
+            String firstParam, HashMap<String, String> params) throws ApunableException {
         try {
             int index = Integer.parseInt(firstParam) - 1;
             taskList.get(index).markAsDone();

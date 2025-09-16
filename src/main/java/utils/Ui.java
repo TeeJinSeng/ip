@@ -11,7 +11,8 @@ public class Ui {
 
     /**
      * Echos the {@code message} to the chatbot user.
-     * @param message message to be printed out by chatbot to the user
+     * 
+     * @param message message to be printed out by chatbot to the user.
      */
     public void echo(String message) {
         System.out.println("\t" + message);

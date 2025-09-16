@@ -5,18 +5,17 @@ import java.util.HashMap;
 import exceptions.ApunableException;
 import tasks.Task;
 import tasks.TaskList;
-import utils.Command;
 import utils.Ui;
 
 /**
  * Handles the {@code delete <index>} command from user and delete a task based on provided index. 
  * 
- * @param input formatted user input
+ * @param input formatted user input. 
  */
 public class HandlerDelete implements CommandHandler {
     @Override
-    public void handle(TaskList taskList, Ui ui, String firstParam, HashMap<String, String> params) throws ApunableException {
-
+    public void handle(TaskList taskList, Ui ui, 
+            String firstParam, HashMap<String, String> params) throws ApunableException {
         try {
             int index = Integer.parseInt(firstParam) - 1;
     

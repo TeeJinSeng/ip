@@ -1,4 +1,4 @@
-package Apunable.ui;
+package apunable.ui;
 
 import exceptions.ApunableException;
 import tasks.TaskList;
