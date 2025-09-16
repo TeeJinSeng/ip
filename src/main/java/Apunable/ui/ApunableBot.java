@@ -32,6 +32,10 @@ public class ApunableBot {
         }
     }
 
+    public ApunableBot() {
+        this("data/tasks.txt");
+    }
+
     /**
      * Starts running the chatbot to interact with users(accept inputs, process and produce output). 
      */
@@ -55,5 +59,18 @@ public class ApunableBot {
 
     public static void main(String[] args) {
         new ApunableBot("data/tasks.txt").run();
+    }
+    
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        // try {
+        //     Command c = Parser.parse(input);
+        //     c.execute(tasks, ui, storage);
+        //     isExit = c.isExit();
+        // } catch (Exception e) {
+        // }
+        return "Apunable heard: " + input;
     }
 }
