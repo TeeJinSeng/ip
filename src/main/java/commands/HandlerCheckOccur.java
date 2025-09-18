@@ -17,7 +17,12 @@ public class HandlerCheckOccur implements CommandHandler {
     @Override
     public void handle(TaskList taskList, Ui ui, 
             String firstParam, HashMap<String, String> params) throws ApunableException {
+
+        assert !firstParam.isEmpty() : "Please provide date time for check-occur";
+
         LocalDateTime inputDate = DateTimeUtil.tryParse(firstParam);
+
+        assert inputDate != null : "Invalid date time format";
 
         ArrayList<Task> occuringTasks = new ArrayList<>();
 

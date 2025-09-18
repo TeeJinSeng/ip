@@ -49,10 +49,11 @@ application {
 
 shadowJar {
     archiveBaseName = "apunable"
-    archiveFileName = 'apunable-0.1.jar'
+    archiveFileName = 'apunable-0.2.jar'
     archiveClassifier = null
 }
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }

@@ -20,6 +20,8 @@ public class Command {
     }
 
     public Command(CommandType cmd, String fstParam, HashMap<String, String> params) {
+        assert cmd != null : "Invalid command type";
+        
         commandType = cmd;
         firstParam = fstParam;
         this.params = params;
