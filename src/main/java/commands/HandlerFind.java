@@ -1,7 +1,8 @@
 package commands;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Stream;
 
 import exceptions.ApunableException;
 import tasks.Task;
@@ -15,23 +16,28 @@ import utils.Ui;
  */
 public class HandlerFind implements CommandHandler {
     @Override
-    public void handle(TaskList taskList, Ui ui, String firstParam, HashMap<String, String> params) throws ApunableException {
+    public void handle(TaskList taskList, Ui ui, 
+            String firstParam, HashMap<String, String> params) throws ApunableException {
         if (firstParam.isEmpty()) {
             throw new ApunableException("Find keyword cannot be empty");
         }
 
-        ArrayList<Task> matchTasks = new ArrayList<>();
+        String lowerFirstParam = firstParam.toLowerCase();
 
-        for(int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).getDescription().toLowerCase().contains(firstParam.toLowerCase())) {
-                matchTasks.add(taskList.get(i));
-            }
-        }
+        List<Task> matchTasks = Stream.iterate(0, i -> i < taskList.size(), i -> i + 1)
+                .map(i -> taskList.get(i)).filter(task -> {
+                    String lowerDesc = task.getDescription().toLowerCase();
+                    return lowerDesc.contains(lowerFirstParam);
+                }).toList();
 
-        ui.echo("Here are the matching tasks in your list:");
+        if (matchTasks.isEmpty()) {
+            ui.echo("(no matching tasks)");
+        } else {
+            ui.echo("Here are the matching tasks in your list:");
 
-        for(int i = 0; i < taskList.size(); i ++) {
-            ui.echo(String.format("%d.%s", i + 1, matchTasks.get(i)));
+            Stream.iterate(0, i -> i < matchTasks.size(), i -> i + 1).forEach(i -> {
+                ui.echo(String.format("%d.%s", i + 1, matchTasks.get(i)));
+            });
         }
     }
 }

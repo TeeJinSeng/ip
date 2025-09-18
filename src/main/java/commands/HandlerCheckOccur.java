@@ -1,7 +1,8 @@
 package commands;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
@@ -19,18 +20,30 @@ public class HandlerCheckOccur implements CommandHandler {
             String firstParam, HashMap<String, String> params) throws ApunableException {
         LocalDateTime inputDate = DateTimeUtil.tryParse(firstParam);
 
-        ArrayList<Task> occuringTasks = new ArrayList<>();
+        List<Task> occuringTasks = Stream.iterate(0, i -> i < taskList.size(), i -> i + 1)
+                .map(i -> taskList.get(i)).filter(task -> {
+                    Boolean isOcurring = task.isOcurringAt(inputDate);
+                    return isOcurring != null && isOcurring == true;
+                }).toList();
 
-        for(int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).isOcurringAt(inputDate)) {
-                occuringTasks.add(taskList.get(i));
-            }
-        }
+        // for (int i = 0; i < taskList.size(); i++) {
+        //     if (taskList.get(i).isOcurringAt(inputDate)) {
+        //         occuringTasks.add(taskList.get(i));
+        //     }
+        // }
 
-        ui.echo("Here are the tasks occuring on this date:");
+        if (occuringTasks.isEmpty()) {
+            ui.echo("(no tasks occuring at given date time)");
+        } else {
+            ui.echo("Here are the tasks occuring on this date:");
 
-        for(int i = 0; i < occuringTasks.size(); i ++) {
-            ui.echo(String.format("%d.%s", i + 1, occuringTasks.get(i)));
+            Stream.iterate(0, i -> i < occuringTasks.size(), i -> i + 1).forEach(i -> {
+                ui.echo(String.format("%d.%s", i + 1, occuringTasks.get(i)));
+            });
+
+            // for (int i = 0; i < occuringTasks.size(); i ++) {
+            //     ui.echo(String.format("%d.%s", i + 1, occuringTasks.get(i)));
+            // }
         }
     }
 }

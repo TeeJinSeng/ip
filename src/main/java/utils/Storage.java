@@ -100,7 +100,7 @@ public class Storage {
         }
         
         try {
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 String formattedString = sc.nextLine();
                 tasks.add(createTaskFromString(formattedString, tasks.size() + 1));
             }
