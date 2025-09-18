@@ -20,16 +20,24 @@ public class HandlerFind implements CommandHandler {
 
         ArrayList<Task> matchTasks = new ArrayList<>();
 
+        String lowerFirstParam = firstParam.toLowerCase();
+
         for(int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).getDescription().toLowerCase().contains(firstParam.toLowerCase())) {
+            String lowerDescription = taskList.get(i).getDescription().toLowerCase();
+
+            if (lowerDescription.contains(lowerFirstParam)) {
                 matchTasks.add(taskList.get(i));
             }
         }
 
-        ui.echo("Here are the matching tasks in your list:");
+        if (matchTasks.isEmpty()) {
+            ui.echo("(no matching task)");
+        } else {
+            ui.echo("Here are the matching tasks in your list:");
 
-        for(int i = 0; i < taskList.size(); i ++) {
-            ui.echo(String.format("%d.%s", i + 1, matchTasks.get(i)));
+            for(int i = 0; i < matchTasks.size(); i ++) {
+                ui.echo(String.format("%d.%s", i + 1, matchTasks.get(i)));
+            }
         }
     }
 }

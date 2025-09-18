@@ -8,7 +8,7 @@ public enum CommandType {
     MARK("mark", new HandlerMark()),
     UNMARK("unmark", new HandlerUnmark()),
     DELETE("delete", new HandlerDelete()),
-    TODO("todo", new HandlerTodo()),
+    TODO("todo", new CreateTaskTodo()),
     EVENT("event", new CreateTaskEvent()),
     DEADLINE("deadline", new CreateTaskDeadline()),
     CHECK_OCCUR("check-occur", new HandlerCheckOccur()),
@@ -25,7 +25,7 @@ public enum CommandType {
 
     private CommandType(String label) {
         LABEL = label;
-        HANDLER = new HandlerList(); // Just assign a random handler
+        HANDLER = null;
     }
 
     public CommandHandler getHandler() {

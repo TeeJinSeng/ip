@@ -3,6 +3,7 @@ package commands;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
+import tasks.Task;
 import tasks.TaskList;
 import utils.Ui;
 
@@ -18,14 +19,23 @@ public class HandlerMark implements CommandHandler {
 
         try {
             int index = Integer.parseInt(firstParam) - 1;
-            taskList.get(index).markAsDone();
+            Task task = taskList.get(index);
 
-            ui.echo("Nice! I've marked this task as done:");
-            ui.echo("  " + taskList.get(index).toString());
+            if (task.getStatusIcon().equals("X")) {
+                ui.echo("This task has been marked as done");
+            } else {
+                task.markAsDone();
+
+                ui.echo("Nice! I've marked this task as done:");
+                ui.echo("  " + task.toString());
+            }
         } catch (NumberFormatException e) {
             throw new ApunableException("Wrong index format");
         } catch (IndexOutOfBoundsException e) {
-            throw new ApunableException("Wrong index format");
+            if (taskList.size() == 0) {
+                throw new ApunableException("Your taskList is empty! Nothing to mark as done");
+            }
+            throw new ApunableException(String.format("Please enter a number between 1 and %d", taskList.size()));
         }
     }
 }
