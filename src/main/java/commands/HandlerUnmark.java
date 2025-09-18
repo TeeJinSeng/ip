@@ -13,7 +13,10 @@ public class HandlerUnmark implements CommandHandler {
     @Override
     public void handle(TaskList taskList, Ui ui, 
             String firstParam, HashMap<String, String> params) throws ApunableException {
-        try {
+
+            assert !firstParam.isEmpty() : "Please provide index for unmark command";
+
+            try {
             int index = Integer.parseInt(firstParam) - 1;
 
             taskList.get(index).markAsUndone();
