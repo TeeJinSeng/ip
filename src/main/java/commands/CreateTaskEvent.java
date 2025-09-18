@@ -23,11 +23,8 @@ public class CreateTaskEvent extends CreateTaskHandler {
             throw new ApunableException("Missing arguments(description, /from or /to)");
         }
 
-        LocalDateTime from;
-        LocalDateTime to;
-
-        from = DateTimeUtil.tryParse(fromStr);
-        to = DateTimeUtil.tryParse(toStr);
+        LocalDateTime from = DateTimeUtil.tryParse(fromStr);
+        LocalDateTime to = DateTimeUtil.tryParse(toStr);
 
         if (from == null || to == null) {
             throw new ApunableException("Invalid date time format for from/to");

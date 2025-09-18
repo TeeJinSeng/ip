@@ -26,6 +26,9 @@ public class HandlerDelete implements CommandHandler {
         } catch (NumberFormatException e) {
             throw new ApunableException("Invalid index format");
         } catch (IndexOutOfBoundsException e) {
+            if (taskList.size() == 0) {
+                throw new ApunableException("Your taskList is empty! Nothing to delete");
+            }
             throw new ApunableException(String.format("Please enter a number between 1 and %d", taskList.size()));
         }
     }

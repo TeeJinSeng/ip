@@ -18,8 +18,8 @@ public class Parser {
     public static Command parse(String input) throws ApunableException {
         String[] temp = input.trim().split(" ", 2);
 
-        String commandType = temp[0];
-        CommandType cmd = CommandType.fromString(commandType);
+        String commandTypeStr = temp[0];
+        CommandType cmd = CommandType.fromString(commandTypeStr);
         if (cmd == null) {
             throw new ApunableException("Invalid command");
         }
@@ -41,7 +41,7 @@ public class Parser {
                     String argument = "";
                     
                     if (paramArg.length >= 2) {
-                        argument = paramArg[1];
+                        argument = paramArg[1].trim();
                     }
 
                     params.put(paramName, argument);

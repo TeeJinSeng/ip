@@ -22,7 +22,9 @@ public class HandlerCheckOccur implements CommandHandler {
         ArrayList<Task> occuringTasks = new ArrayList<>();
 
         for(int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).isOcurringAt(inputDate)) {
+            Boolean isOccuring = taskList.get(i).isOcurringAt(inputDate);
+
+            if (isOccuring != null && isOccuring == true) {
                 occuringTasks.add(taskList.get(i));
             }
         }

@@ -8,7 +8,7 @@ public class Task {
 
     Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     public String getDescription() {
@@ -29,14 +29,14 @@ public class Task {
      * Marks this task as done. 
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
     
     /**
      * Marks this task as undone. 
      */
     public void markAsUndone() {
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -60,6 +60,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), description);
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 }
