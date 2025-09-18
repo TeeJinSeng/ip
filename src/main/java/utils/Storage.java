@@ -64,13 +64,17 @@ public class Storage {
 
         switch (taskInfos[0]) {
             case "T" -> {
+                assert taskInfos.length > 2 : "Wrong format at line " + lineNum;
                 task = new Todo(taskInfos[2]);
             }
             case "D" -> {
+                assert taskInfos.length > 3 : "Wrong format at line " + lineNum;
                 task = new Deadline(taskInfos[2], taskInfos[3]);
             }
             case "E" -> {
+                assert taskInfos.length > 3 : "Wrong format at line " + lineNum;
                 String[] fromTo = taskInfos[3].split(" \\| ");
+                assert fromTo.length > 1 : "Failed to extract fromto at line " + lineNum;
                 task = new Event(taskInfos[2], fromTo[0], fromTo[1]);
             }
             default -> {

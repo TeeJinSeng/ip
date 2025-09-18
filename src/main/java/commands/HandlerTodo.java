@@ -12,16 +12,8 @@ import tasks.Todo;
 public class HandlerTodo extends CreateTaskHandler {
     @Override
     public Task createTask(String firstParam, HashMap<String, String> params) throws ApunableException {
-        try {
-            if (firstParam.isEmpty()) {
-                throw new ApunableException("Description for todo cannot be empty");
-            }
+        assert !firstParam.isEmpty() : "Description for todo cannot be empty";
     
-            return new Todo(firstParam.trim());
-        } catch (NumberFormatException e) {
-            throw new ApunableException("Wrong index format");
-        } catch (IndexOutOfBoundsException e) {
-            throw new ApunableException("Wrong index format");
-        }
+        return new Todo(firstParam.trim());
     }
 }

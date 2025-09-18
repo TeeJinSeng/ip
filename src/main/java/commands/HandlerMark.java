@@ -13,6 +13,9 @@ public class HandlerMark implements CommandHandler {
     @Override
     public void handle(TaskList taskList, Ui ui, 
             String firstParam, HashMap<String, String> params) throws ApunableException {
+        
+        assert !firstParam.isEmpty() : "Please provide index for mark command";
+
         try {
             int index = Integer.parseInt(firstParam) - 1;
             taskList.get(index).markAsDone();

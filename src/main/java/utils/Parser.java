@@ -20,9 +20,8 @@ public class Parser {
 
         String commandType = temp[0];
         CommandType cmd = CommandType.fromString(commandType);
-        if (cmd == null) {
-            throw new ApunableException("Invalid command");
-        }
+
+        assert cmd != null : "Invalid command";
 
         String firstParam = "";
         HashMap<String, String> params = new HashMap<>();

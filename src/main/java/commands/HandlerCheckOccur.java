@@ -18,7 +18,12 @@ public class HandlerCheckOccur implements CommandHandler {
     @Override
     public void handle(TaskList taskList, Ui ui, 
             String firstParam, HashMap<String, String> params) throws ApunableException {
+
+        assert !firstParam.isEmpty() : "Please provide date time for check-occur";
+
         LocalDateTime inputDate = DateTimeUtil.tryParse(firstParam);
+
+        assert inputDate != null : "Invalid date time format";
 
         List<Task> occuringTasks = Stream.iterate(0, i -> i < taskList.size(), i -> i + 1)
                 .map(i -> taskList.get(i)).filter(task -> {
@@ -27,7 +32,7 @@ public class HandlerCheckOccur implements CommandHandler {
                 }).toList();
 
         // for (int i = 0; i < taskList.size(); i++) {
-        //     if (taskList.get(i).isOcurringAt(inputDate)) {
+        //     if (taskList.get(i).isOcurringAt(inputDate) == true) {
         //         occuringTasks.add(taskList.get(i));
         //     }
         // }

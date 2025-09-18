@@ -17,15 +17,12 @@ public class CreateTaskDeadline extends CreateTaskHandler {
         String desc = firstParam;
         String byStr = params.getOrDefault("by", "");
 
-        if (desc.isEmpty() || byStr.isEmpty()) {
-            throw new ApunableException("Missing arguments(description or /by)");
-        }
+        assert !desc.isEmpty() : "Description for deadline cannot be empty! ";
+        assert !byStr.isEmpty() : "Please provide argument for /by";
 
         LocalDateTime by = DateTimeUtil.tryParse(byStr);
 
-        if (by == null) {
-            throw new ApunableException("Invalid date format for by");
-        }
+        assert by != null : "Invalid date format for by";
 
         return new Deadline(desc, by);
     }
