@@ -86,6 +86,9 @@ public class ApunableBot {
         } catch (ApunableException e) {
             ui.showError(e.getMessage());
             return ui.getOutput();
+        } catch (AssertionError e) {
+            ui.showError(e.getMessage());
+            return ui.getOutput();
         }
     }
 }

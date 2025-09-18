@@ -14,6 +14,9 @@ public class HandlerDelete implements CommandHandler {
     @Override
     public void handle(TaskList taskList, Ui ui, 
             String firstParam, HashMap<String, String> params) throws ApunableException {
+        
+        assert !firstParam.isEmpty() : "Please provide index of task that you want to delete";
+        
         try {
             int index = Integer.parseInt(firstParam) - 1;
     
