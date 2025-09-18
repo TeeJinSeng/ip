@@ -29,7 +29,7 @@ public class HandlerFind implements CommandHandler {
                 }).toList();
 
         if (matchTasks.isEmpty()) {
-            ui.echo("(no matching tasks)");
+            ui.echo("(no matching task)");
         } else {
             ui.echo("Here are the matching tasks in your list:");
 

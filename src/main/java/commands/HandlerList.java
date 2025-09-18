@@ -15,12 +15,12 @@ public class HandlerList implements CommandHandler {
     public void handle(TaskList taskList, Ui ui, 
             String firstParam, HashMap<String, String> params) throws ApunableException {
         if (taskList.size() == 0) {
-            ui.echo("There are no tasks in your list");
+            ui.echo("There is no task in your list");
         } else {
             ui.echo("Here are the tasks in your list:");
-    
+        
             Stream.iterate(0, i -> i < taskList.size(), i -> i + 1).forEach(i -> {
-                ui.echo(String.format("%d.%s", i + 1, taskList.get(i)));
+                    ui.echo(String.format("%d.%s", i + 1, taskList.get(i)));
             });
         }
     }

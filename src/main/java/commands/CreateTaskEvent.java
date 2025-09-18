@@ -19,16 +19,12 @@ public class CreateTaskEvent extends CreateTaskHandler {
         String fromStr = params.getOrDefault("from", "");
         String toStr = params.getOrDefault("to", "");
 
-        
         assert !desc.isEmpty() : "Event for deadline cannot be empty! ";
         assert !fromStr.isEmpty() : "Please provide argument for /from";
         assert !toStr.isEmpty() : "Please provide argument for /to";
 
-        LocalDateTime from;
-        LocalDateTime to;
-
-        from = DateTimeUtil.tryParse(fromStr);
-        to = DateTimeUtil.tryParse(toStr);
+        LocalDateTime from = DateTimeUtil.tryParse(fromStr);
+        LocalDateTime to = DateTimeUtil.tryParse(toStr);
         
         assert from != null : "Invalid date time format for /from";
         assert to != null : "Invalid date time format for /to";

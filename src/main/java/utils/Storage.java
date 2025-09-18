@@ -35,8 +35,8 @@ public class Storage {
         // Ensure parent directories exist
         File parentDirectory = dataFile.getParentFile();
         if (parentDirectory != null && !parentDirectory.exists()) {
-            boolean isDirectoriesCreated = parentDirectory.mkdirs();
-            if (!isDirectoriesCreated) {
+            boolean isDirCreated = parentDirectory.mkdirs();
+            if (!isDirCreated) {
                 throw new ApunableException("Failed to create parent directories for file: " + FILE_PATH);
             }
         }
@@ -58,7 +58,7 @@ public class Storage {
         }
     }
 
-    private Task createTaskFromString(String formattedString, int lineNum) throws ApunableException {
+    private Task createTaskFromString(String formattedString) throws ApunableException {
         String[] taskInfos = formattedString.split(" \\| ", 4);
         Task task = null;
 
@@ -78,7 +78,7 @@ public class Storage {
                 task = new Event(taskInfos[2], fromTo[0], fromTo[1]);
             }
             default -> {
-                throw new ApunableException("Wrong format at line " + lineNum);
+                throw new ApunableException("Invalid task type");
             }
         }
 
@@ -106,13 +106,13 @@ public class Storage {
         try {
             while (sc.hasNext()) {
                 String formattedString = sc.nextLine();
-                tasks.add(createTaskFromString(formattedString, tasks.size() + 1));
+                tasks.add(createTaskFromString(formattedString));
             }
         } catch (IndexOutOfBoundsException e) {
             throw new ApunableException(String.format("Wrong format at line %d, message: %s", 
                 tasks.size() + 1, e.getMessage()));
         } catch (ApunableException e) {
-            throw e;
+            throw new ApunableException(e.getMessage() + " at line " + (tasks.size() + 1));
         } finally {
             sc.close();
         }
