@@ -13,6 +13,11 @@ public enum CommandType {
     DEADLINE("deadline", new CreateTaskDeadline()),
     CHECK_OCCUR("check-occur", new HandlerCheckOccur()),
     FIND("find", new HandlerFind()),
+
+    ADD("addcontact", new ContactAdd()),
+    DELETE_CONTACT("deletecontact", new ContactDelete()),
+    LIST_CONTACT("listcontact", new ContactHandlerList()),
+    // EDIT
     BYE("bye");
 
     private final String LABEL;

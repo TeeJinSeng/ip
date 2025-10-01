@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import exceptions.ApunableException;
+import tasks.ContactList;
 import tasks.Task;
 import tasks.TaskList;
 import utils.Ui;
@@ -16,7 +17,7 @@ import utils.Ui;
  */
 public class HandlerFind implements CommandHandler {
     @Override
-    public void handle(TaskList taskList, Ui ui, 
+    public void handle(TaskList taskList, ContactList contactList, Ui ui, 
             String firstParam, HashMap<String, String> params) throws ApunableException {
         assert !firstParam.isEmpty() : "Find keyword cannot be empty";
 

@@ -5,17 +5,20 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import exceptions.ApunableException;
+import tasks.Contact;
 import tasks.Deadline;
 import tasks.Event;
+import tasks.Savable;
 import tasks.Task;
 import tasks.TaskList;
 import tasks.Todo;
 
 /**
- * A util that handles storing and loading tasks from and to a provided {@code filePath}. 
+ * A util that handles storing and loading savables from and to a provided {@code filePath}. 
  */
 public class Storage {
     private final String FILE_PATH;
@@ -25,11 +28,11 @@ public class Storage {
     }
 
     /**
-     * Saves the tasks into file.
+     * Saves the savable into file.
      * 
-     * @param tasks list of tasks added by user recently. 
+     * @param savable savable(usually list of certain items) added by users. 
      */
-    public void save(TaskList tasks) throws ApunableException {
+    public void save(Savable savable) throws ApunableException {
         File dataFile = new File(FILE_PATH);
 
         // Ensure parent directories exist
@@ -49,51 +52,19 @@ public class Storage {
 
         try {
             FileWriter fw = new FileWriter(dataFile);
-            for (int i = 0; i < tasks.size(); i++) {
-                fw.write(tasks.get(i).getFormattedString() + "\n");
-            }
+            
+            fw.write(savable.getFormattedString());
             fw.close();
         } catch (IOException e) {
             System.out.println("Failed to write to file");
         }
     }
 
-    private Task createTaskFromString(String formattedString) throws ApunableException {
-        String[] taskInfos = formattedString.split(" \\| ", 4);
-        Task task = null;
-
-        switch (taskInfos[0]) {
-            case "T" -> {
-                assert taskInfos.length > 2 : "Wrong format at line " + lineNum;
-                task = new Todo(taskInfos[2]);
-            }
-            case "D" -> {
-                assert taskInfos.length > 3 : "Wrong format at line " + lineNum;
-                task = new Deadline(taskInfos[2], taskInfos[3]);
-            }
-            case "E" -> {
-                assert taskInfos.length > 3 : "Wrong format at line " + lineNum;
-                String[] fromTo = taskInfos[3].split(" \\| ");
-                assert fromTo.length > 1 : "Failed to extract fromto at line " + lineNum;
-                task = new Event(taskInfos[2], fromTo[0], fromTo[1]);
-            }
-            default -> {
-                throw new ApunableException("Invalid task type");
-            }
-        }
-
-        if (task != null && taskInfos[1].equals("1")) {
-            task.markAsDone();
-        }
-
-        return task;
-    }
-
     /**
-     * Loads the tasks from {@code FILE_PATH} specified.
+     * Loads the Strings from {@code FILE_PATH} specified.
      */
-    public ArrayList<Task> load() throws ApunableException {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public ArrayList<String> load() throws ApunableException {
+        ArrayList<String> lines = new ArrayList<>();
 
         File dataFile = new File(FILE_PATH);
         Scanner sc;
@@ -103,20 +74,12 @@ public class Storage {
             throw new ApunableException("data file does not exist");
         }
         
-        try {
-            while (sc.hasNext()) {
-                String formattedString = sc.nextLine();
-                tasks.add(createTaskFromString(formattedString));
-            }
-        } catch (IndexOutOfBoundsException e) {
-            throw new ApunableException(String.format("Wrong format at line %d, message: %s", 
-                tasks.size() + 1, e.getMessage()));
-        } catch (ApunableException e) {
-            throw new ApunableException(e.getMessage() + " at line " + (tasks.size() + 1));
-        } finally {
-            sc.close();
+        while (sc.hasNext()) {
+            lines.add(sc.nextLine());
         }
+    
+        sc.close();
 
-        return tasks;
+        return lines;
     }
 }
