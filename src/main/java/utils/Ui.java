@@ -41,7 +41,7 @@ public class Ui {
      */
     public void showLine() {
         String horizontalLine = "____________________________________________________________";
-        System.out.println(horizontalLine);
+        // System.out.println(horizontalLine);
     }
 
     /**

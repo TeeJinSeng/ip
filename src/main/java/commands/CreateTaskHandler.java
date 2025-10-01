@@ -3,6 +3,7 @@ package commands;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
+import tasks.ContactList;
 import tasks.Task;
 import tasks.TaskList;
 import utils.Ui;
@@ -15,7 +16,7 @@ public abstract class CreateTaskHandler implements CommandHandler {
     /**
      * A specific chunk of code that will be reused by all the CreateTaskHandler. 
      */
-    public void handle(TaskList taskList, Ui ui, 
+    public void handle(TaskList taskList, ContactList contactList, Ui ui, 
             String firstParam, HashMap<String, String> params) throws ApunableException {
         Task task = createTask(firstParam, params);
         taskList.add(task);

@@ -1,8 +1,8 @@
 package apunable.ui;
 
-import javafx.application.Platform;
-
 import exceptions.ApunableException;
+import javafx.application.Platform;
+import tasks.ContactList;
 import tasks.TaskList;
 import utils.Command;
 import utils.Parser;
@@ -15,7 +15,9 @@ import utils.Ui;
 public class ApunableBot {
 
     private Storage storage;
+    private Storage contactStorage;
     private TaskList tasks;
+    private ContactList contacts;
     private Ui ui;
 
     /**
@@ -23,19 +25,22 @@ public class ApunableBot {
      * 
      * @param filePath path to file that store tasklist. 
      */
-    public ApunableBot(String filePath) {
+    public ApunableBot(String filePath, String contactPath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        contactStorage = new Storage(contactPath);
         try {
             tasks = new TaskList(storage.load());
+            contacts = new ContactList(contactStorage.load());
         } catch (ApunableException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+            contacts = new ContactList();
         }
     }
 
     public ApunableBot() {
-        this("data/tasks.txt");
+        this("data/tasks.txt", "data/contacts.txt");
     }
 
     /**
@@ -49,7 +54,7 @@ public class ApunableBot {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, contacts, ui, storage, contactStorage);
                 isExit = c.isExit();
             } catch (ApunableException e) {
                 ui.showError(e.getMessage());
@@ -60,7 +65,7 @@ public class ApunableBot {
     }
 
     public static void main(String[] args) {
-        new ApunableBot("data/tasks.txt").run();
+        new ApunableBot("data/tasks.txt", "data/contacts.txt").run();
     }
 
     /**
@@ -77,7 +82,7 @@ public class ApunableBot {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            c.execute(tasks, ui, storage);
+            c.execute(tasks, contacts, ui, storage, contactStorage);
             if (c.isExit()) {
                 Platform.runLater(Platform::exit);
             }

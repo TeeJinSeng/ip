@@ -3,6 +3,7 @@ package commands;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
+import tasks.ContactList;
 import tasks.TaskList;
 import utils.Ui;
 
@@ -19,6 +20,6 @@ public interface CommandHandler {
      * @param params the other parameters, extracted from "/param argument" to "param: argument" in HashMap. 
      * @throws ApunableException the only posible exception that will be thrown. 
      */
-    public void handle(TaskList taskList, Ui ui, 
+    public void handle(TaskList taskList, ContactList contactList, Ui ui, 
             String firstParam, HashMap<String, String> params) throws ApunableException;
 }

@@ -33,7 +33,7 @@ public class DateTimeUtil {
      * @param dateStr string that is going to be parsed. 
      * @return a {@code LocalDate} object. 
      */
-    private static LocalDate parseDate(String dateStr) {
+    public static LocalDate parseDate(String dateStr) {
         String[] dayMonthYear = dateStr.split("[/-]");
 
         int day;

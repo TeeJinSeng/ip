@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.stream.Stream;
 
 import exceptions.ApunableException;
+import tasks.ContactList;
 import tasks.TaskList;
 import utils.Ui;
 
@@ -12,7 +13,7 @@ import utils.Ui;
  */
 public class HandlerList implements CommandHandler {
     @Override
-    public void handle(TaskList taskList, Ui ui, 
+    public void handle(TaskList taskList, ContactList contactList, Ui ui, 
             String firstParam, HashMap<String, String> params) throws ApunableException {
         if (taskList.size() == 0) {
             ui.echo("There is no task in your list");
