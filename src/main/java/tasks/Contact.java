@@ -179,6 +179,20 @@ public class Contact {
         return isFit;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Contact that)) {
+            return false;
+        }
+        return name.equals(that.name) && firstName.equals(that.firstName) && lastName.equals(that.lastName)
+                && address.equals(that.address) && organization.equals(that.organization) && emails.equals(that.emails)
+                && nickName.equals(that.nickName) && (birthday == that.birthday || birthday.equals(that.birthday))
+                && notes.equals(that.notes) && phoneNumbers.equals(that.phoneNumbers);
+    }
+
     public String basicInfo() {
         // name, phone, email, organization
         return String.format("%s(org: %s), \nphone: %s\nemail: %s", name, organization, 

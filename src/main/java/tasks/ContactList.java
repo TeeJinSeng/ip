@@ -9,7 +9,7 @@ import exceptions.ApunableException;
  * Stores names added by user. 
  */
 public class ContactList implements Savable {
-    public static ArrayList<Contact> contacts;
+    public ArrayList<Contact> contacts;
 
     public ContactList() {
         contacts = new ArrayList<>();
@@ -39,6 +39,19 @@ public class ContactList implements Savable {
                 throw new ApunableException(e.getMessage() + " at line " + i);
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof ContactList that)) {
+            return false;
+        }
+
+        return contacts.equals(that.contacts);
     }
 
     @Override
