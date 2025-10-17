@@ -6,7 +6,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
-import tasks.Task;
+import models.Task;
 
 public class CreateTaskEventTest {
     @Test

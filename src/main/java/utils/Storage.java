@@ -5,17 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import exceptions.ApunableException;
-import tasks.Contact;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Savable;
-import tasks.Task;
-import tasks.TaskList;
-import tasks.Todo;
+import models.Savable;
 
 /**
  * A util that handles storing and loading savables from and to a provided {@code filePath}. 

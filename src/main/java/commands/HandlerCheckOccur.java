@@ -6,19 +6,19 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import exceptions.ApunableException;
-import tasks.ContactList;
-import tasks.Task;
-import tasks.TaskList;
+import models.ContactBook;
+import models.Task;
+import models.TaskList;
 import utils.DateTimeUtil;
 import utils.Ui;
 
 /**
- * Prints a list of tasks that occur at given date(i.e. {@code task.isOccuringAt()} return true). 
+ * Prints a list of models that occur at given date(i.e. {@code task.isOccuringAt()} return true).
  */
 public class HandlerCheckOccur implements CommandHandler {
     @Override
-    public void handle(TaskList taskList, ContactList contactList, Ui ui, 
-            String firstParam, HashMap<String, String> params) throws ApunableException {
+    public void handle(TaskList taskList, ContactBook contactList, Ui ui,
+                       String firstParam, HashMap<String, String> params) throws ApunableException {
 
         assert !firstParam.isEmpty() : "Please provide date time for check-occur";
 
@@ -32,26 +32,14 @@ public class HandlerCheckOccur implements CommandHandler {
                     return isOcurring != null && isOcurring == true;
                 }).toList();
 
-        // for (int i = 0; i < taskList.size(); i++) {
-        //     Boolean isOccuring = taskList.get(i).isOcurringAt(inputDate);
-
-        //     if (isOccuring != null && isOccuring == true) {
-        //         occuringTasks.add(taskList.get(i));
-        //     }
-        // }
-
         if (occuringTasks.isEmpty()) {
-            ui.echo("(no tasks occuring at given date time)");
+            ui.echo("(no models occuring at given date time)");
         } else {
-            ui.echo("Here are the tasks occuring on this date:");
+            ui.echo("Here are the models occuring on this date:");
 
             Stream.iterate(0, i -> i < occuringTasks.size(), i -> i + 1).forEach(i -> {
                 ui.echo(String.format("%d.%s", i + 1, occuringTasks.get(i)));
             });
-
-            // for (int i = 0; i < occuringTasks.size(); i ++) {
-            //     ui.echo(String.format("%d.%s", i + 1, occuringTasks.get(i)));
-            // }
         }
     }
 }

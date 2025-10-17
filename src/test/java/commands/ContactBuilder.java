@@ -3,7 +3,7 @@ package commands;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
-import tasks.Contact;
+import models.Contact;
 
 public class ContactBuilder {
     String name;

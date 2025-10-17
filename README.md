@@ -24,3 +24,9 @@ Prerequisites: JDK 17, update Intellij to the most recent version.
    ```
 
 **Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+
+## Acknowledgements
+
+Parts of this project were developed with assistance from OpenAI's ChatGPT (GPT-5) and Gemini 2.5 Flash.
+The AI was used for code explanations, documentation drafting, and brainstorming possible designs.  
+All code was reviewed, tested, and finalized by the project authors.

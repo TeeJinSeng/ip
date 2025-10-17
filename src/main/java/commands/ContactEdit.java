@@ -1,27 +1,86 @@
 package commands;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
-import tasks.ContactList;
-import tasks.TaskList;
+import models.Contact;
+import models.ContactBook;
+import models.Phone;
+import models.TaskList;
 import utils.Ui;
 
+/**
+ * Handles the {@code editcontact} command from user and edit info of the contact with given name.
+ */
 public class ContactEdit implements ContactHandler {
-    public void handle(TaskList taskList, ContactList contactList, Ui ui, 
-            String firstParam, HashMap<String, String> params) throws ApunableException {
+    @Override
+    public void handle(TaskList taskList, ContactBook contactList, Ui ui,
+                       String firstParam, HashMap<String, String> params) throws ApunableException {
 
         String name = firstParam;
 
-        assert !name.isEmpty() : "No name provided for delete contact command";
+        assert !name.isEmpty() : "No name provided for edit contact command";
 
-        int index = 0;// contactList.getNames().indexOf(name);
+        HashMap<String, String> filterCriteria = new HashMap<>(1);
+        filterCriteria.put("name", name);
 
-        if (index == -1) {
+        Integer[] index = contactList.getIndices(filterCriteria);
+        Contact contactToEdit = null;
+
+        if (index.length == 0) {
             throw new ApunableException("name not in the contact");
-        } else {
-            // ContactList.remove(index);
         }
+
+        // Retrieve the original contact
+        Contact oldContact = contactList.get(index[0]);
+        Contact updatedContact = new Contact(oldContact);
+
+        // Update only fields that are provided
+        if (params.containsKey("name")) {
+            updatedContact.setName(params.getOrDefault("name", oldContact.getName()));
+        }
+        if (params.containsKey("firstname")) {
+            updatedContact.setFirstName(params.get("firstname"));
+        }
+        if (params.containsKey("lastname")) {
+            updatedContact.setLastName(params.get("lastname"));
+        }
+        if (params.containsKey("phone")) {
+            updatedContact.setPhoneNumbers(
+                    Arrays.stream(params.get("phone").split(";")).map(Phone::new).toList()
+            );
+        }
+        if (params.containsKey("address")) {
+            updatedContact.setAddress(params.get("address"));
+        }
+        if (params.containsKey("org")) {
+            updatedContact.setOrganization(params.get("org"));
+        }
+        if (params.containsKey("email")) {
+            updatedContact.setEmails(
+                    Arrays.asList(params.get("email").split(";"))
+            );
+        }
+        if (params.containsKey("notes")) {
+            updatedContact.setNotes(params.get("notes"));
+        }
+        if (params.containsKey("nickname")) {
+            updatedContact.setNickName(params.get("nickname"));
+        }
+        if (params.containsKey("birthday")) {
+            String birthdayStr = params.get("birthday");
+            updatedContact.setBirthday(
+                    LocalDate.parse(birthdayStr, DateTimeFormatter.ofPattern("dd MMM"))
+            );
+        }
+
+        // Save changes back into the list
+        contactList.set(index[0], updatedContact);
+
+        ui.echo("Contact \"" + name + "\" has been updated successfully.");
     }
 
 }

@@ -3,9 +3,9 @@ package commands;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
-import tasks.ContactList;
-import tasks.Task;
-import tasks.TaskList;
+import models.ContactBook;
+import models.Task;
+import models.TaskList;
 import utils.Ui;
 
 /**
@@ -13,8 +13,8 @@ import utils.Ui;
  */
 public class HandlerDelete implements CommandHandler {
     @Override
-    public void handle(TaskList taskList, ContactList contactList, Ui ui, 
-            String firstParam, HashMap<String, String> params) throws ApunableException {
+    public void handle(TaskList taskList, ContactBook contactList, Ui ui,
+                       String firstParam, HashMap<String, String> params) throws ApunableException {
         
         assert !firstParam.isEmpty() : "Please provide index of task that you want to delete";
         
@@ -26,7 +26,7 @@ public class HandlerDelete implements CommandHandler {
 
             ui.echo("Noted. I've deleted this task:");
             ui.echo("  " + taskToRemove.toString());
-            ui.echo(String.format("Now you have %d tasks in the list.", TaskList.tasks.size()));
+            ui.echo(String.format("Now you have %d models in the list.", TaskList.tasks.size()));
         } catch (NumberFormatException e) {
             throw new ApunableException("Invalid index format");
         } catch (IndexOutOfBoundsException e) {

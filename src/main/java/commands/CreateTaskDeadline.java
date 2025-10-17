@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
-import tasks.Deadline;
-import tasks.Task;
+import models.Deadline;
+import models.Task;
 import utils.DateTimeUtil;
 
 /**
- * Handles the deadline command from user and add a new {@code Deadline} task. 
+ * Handles the {@code deadline} command from user and add a new {@code Deadline} task.
  */
 public class CreateTaskDeadline extends CreateTaskHandler {
     @Override

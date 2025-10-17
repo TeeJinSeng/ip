@@ -7,17 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import exceptions.ApunableException;
-import tasks.ContactList;
-import tasks.Task;
-import tasks.TaskList;
-import tasks.Todo;
+import models.ContactBook;
+import models.Task;
+import models.TaskList;
+import models.Todo;
 import utils.Ui;
 
 public class HandlerDeleteTest {
     @Test
     public void testDelete_wrongNumberFormat_throwException() {
         TaskList taskList = new TaskList();
-        ContactList contactList = new ContactList();
+        ContactBook contactList = new ContactBook();
         Ui ui = new Ui();
         HandlerDelete handlerDelete = new HandlerDelete();
         HashMap<String, String> params = new HashMap<>();
@@ -28,7 +28,7 @@ public class HandlerDeleteTest {
     @Test
     public void testDelete_indexOutOfBound_throwException() {
         TaskList taskList = new TaskList();
-        ContactList contactList = new ContactList();
+        ContactBook contactList = new ContactBook();
         Ui ui = new Ui();
         HandlerDelete handlerDelete = new HandlerDelete();
         HashMap<String, String> params = new HashMap<>();
@@ -39,7 +39,7 @@ public class HandlerDeleteTest {
     @Test
     public void normalTest() {
         TaskList taskList = new TaskList();
-        ContactList contactList = new ContactList();
+        ContactBook contactList = new ContactBook();
 
         Task firstTask = new Todo("1");
         Task secondTask = new Todo("2");

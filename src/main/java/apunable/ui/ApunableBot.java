@@ -2,22 +2,22 @@ package apunable.ui;
 
 import exceptions.ApunableException;
 import javafx.application.Platform;
-import tasks.ContactList;
-import tasks.TaskList;
+import models.ContactBook;
+import models.TaskList;
 import utils.Command;
 import utils.Parser;
 import utils.Storage;
 import utils.Ui;
 
 /**
- * A Chatbot that only talks about tasks with users.
+ * A Chatbot that only talks about models with users.
  */
 public class ApunableBot {
 
     private Storage storage;
     private Storage contactStorage;
     private TaskList tasks;
-    private ContactList contacts;
+    private ContactBook contacts;
     private Ui ui;
 
     /**
@@ -31,11 +31,11 @@ public class ApunableBot {
         contactStorage = new Storage(contactPath);
         try {
             tasks = new TaskList(storage.load());
-            contacts = new ContactList(contactStorage.load());
+            contacts = new ContactBook(contactStorage.load());
         } catch (ApunableException e) {
             ui.showLoadingError();
             tasks = new TaskList();
-            contacts = new ContactList();
+            contacts = new ContactBook();
         }
     }
 

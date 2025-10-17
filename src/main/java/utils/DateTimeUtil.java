@@ -30,7 +30,7 @@ public class DateTimeUtil {
     /**
      * Parses {@code dateStr} into a {@code LocalDate} object, used by the {@code tryParse} method. 
      * 
-     * @param dateStr string that is going to be parsed. 
+     * @param dateStr date string of format: {@code dd-MM-yyyy} or {@code yyyy-MM-dd}(or slash{@code /} separated).
      * @return a {@code LocalDate} object. 
      */
     public static LocalDate parseDate(String dateStr) {
@@ -56,7 +56,7 @@ public class DateTimeUtil {
     /**
      * Parses {@code timeStr} into a {@code LocalTime} object, used by the {@code tryParse} method. 
      * 
-     * @param timeStr string that is going to be parsed. 
+     * @param timeStr time string of format {@code MM:ss} or {@code MMss}.
      * @return a {@code LocalTime} object. 
      */
     private static LocalTime parseTime(String timeStr) {
@@ -80,8 +80,9 @@ public class DateTimeUtil {
      * Parses {@code dateTimeStr} into a {@code LocalDateTime} object, 
      * as {@code LocalDateTime.parse} handle too little cases.
      * 
-     * @param dateTimeStr string that is going to be parsed. 
-     * @return a {@code LocalDateTime} object. 
+     * @param dateTimeStr datetime string of format {@code dd-MM-yyyy MM:ss} or other format accepted by
+     * {@code parseDate} and {@code parseTime}.
+     * @return a {@code LocalDateTime} object.
      */
     public static LocalDateTime tryParse(String dateTimeStr) throws ApunableException {
         try {

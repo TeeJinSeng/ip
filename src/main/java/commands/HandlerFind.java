@@ -5,20 +5,18 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import exceptions.ApunableException;
-import tasks.ContactList;
-import tasks.Task;
-import tasks.TaskList;
+import models.ContactBook;
+import models.Task;
+import models.TaskList;
 import utils.Ui;
 
 /**
- * Handles the find command from user and list out all the tasks which descriptions contains the provided keyword. 
- * 
- * @param input formatted user input. 
+ * Handles the {@code find} command from user and list out all the models which descriptions contains the provided keyword.
  */
 public class HandlerFind implements CommandHandler {
     @Override
-    public void handle(TaskList taskList, ContactList contactList, Ui ui, 
-            String firstParam, HashMap<String, String> params) throws ApunableException {
+    public void handle(TaskList taskList, ContactBook contactList, Ui ui,
+                       String firstParam, HashMap<String, String> params) throws ApunableException {
         assert !firstParam.isEmpty() : "Find keyword cannot be empty";
 
         String lowerFirstParam = firstParam.toLowerCase();
@@ -32,7 +30,7 @@ public class HandlerFind implements CommandHandler {
         if (matchTasks.isEmpty()) {
             ui.echo("(no matching task)");
         } else {
-            ui.echo("Here are the matching tasks in your list:");
+            ui.echo("Here are the matching models in your list:");
 
             Stream.iterate(0, i -> i < matchTasks.size(), i -> i + 1).forEach(i -> {
                 ui.echo(String.format("%d.%s", i + 1, matchTasks.get(i)));

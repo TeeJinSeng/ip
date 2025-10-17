@@ -3,18 +3,18 @@ package commands;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
-import tasks.ContactList;
-import tasks.Task;
-import tasks.TaskList;
+import models.ContactBook;
+import models.Task;
+import models.TaskList;
 import utils.Ui;
 
 /**
- * Handles the unmark command from user. 
+ * Handles the {@code unmark} command from user.
  */
 public class HandlerUnmark implements CommandHandler {
     @Override
-    public void handle(TaskList taskList, ContactList contactList, Ui ui, 
-            String firstParam, HashMap<String, String> params) throws ApunableException {
+    public void handle(TaskList taskList, ContactBook contactList, Ui ui,
+                       String firstParam, HashMap<String, String> params) throws ApunableException {
 
             assert !firstParam.isEmpty() : "Please provide index for unmark command";
 

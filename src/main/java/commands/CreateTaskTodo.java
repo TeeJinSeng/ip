@@ -3,11 +3,11 @@ package commands;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
-import tasks.Task;
-import tasks.Todo;
+import models.Task;
+import models.Todo;
 
 /**
- * Handles the todo command from user and add a new {@code Todo} task. 
+ * Handles the {@code todo} command from user and add a new {@code Todo} task.
  */
 public class CreateTaskTodo extends CreateTaskHandler {
     @Override

@@ -57,10 +57,10 @@ public class Ui {
     }
 
     /**
-     * Shows error indicating the failure to load tasks from file. 
+     * Shows error indicating the failure to load models from file.
      */
     public void showLoadingError() {
-        echo("Failed to load tasks from file");
+        echo("Failed to load models from file");
     }
 
     /**

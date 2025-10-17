@@ -1,11 +1,11 @@
-package tasks;
+package models;
 
 import java.util.ArrayList;
 
 import exceptions.ApunableException;
 
 /**
- * Stores tasks added by user. 
+ * Stores models added by user.
  */
 public class TaskList implements Savable {
     public static ArrayList<Task> tasks;
@@ -71,7 +71,7 @@ public class TaskList implements Savable {
     }
 
     /**
-     * @return the number of tasks in this {@code taskList}. 
+     * @return the number of models in this {@code taskList}.
      */
     public int size() {
         return tasks.size();

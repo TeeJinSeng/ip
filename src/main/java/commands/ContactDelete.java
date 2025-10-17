@@ -3,15 +3,18 @@ package commands;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
-import tasks.Contact;
-import tasks.ContactList;
-import tasks.TaskList;
+import models.Contact;
+import models.ContactBook;
+import models.TaskList;
 import utils.Ui;
 
+/**
+ * Handles the {@code deletecontact} command from user and delete a contact with given name.
+ */
 public class ContactDelete implements ContactHandler {
     @Override
-    public void handle(TaskList taskList, ContactList contactList, Ui ui, 
-            String firstParam, HashMap<String, String> params) throws ApunableException {
+    public void handle(TaskList taskList, ContactBook contactList, Ui ui,
+                       String firstParam, HashMap<String, String> params) throws ApunableException {
 
         String name = firstParam;
 
@@ -33,5 +36,4 @@ public class ContactDelete implements ContactHandler {
             ui.echo("  " + contactToDelete.basicInfo());
         }
     }
-
 }

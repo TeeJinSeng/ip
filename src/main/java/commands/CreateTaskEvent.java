@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
-import tasks.Event;
-import tasks.Task;
+import models.Event;
+import models.Task;
 import utils.DateTimeUtil;
 
 /**
- * Handles the event command from user and add a new {@code Event} task. 
+ * Handles the {@code event} command from user and add a new {@code Event} task.
  */
 public class CreateTaskEvent extends CreateTaskHandler {
     @Override

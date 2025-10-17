@@ -3,27 +3,27 @@ package commands;
 import java.util.HashMap;
 
 import exceptions.ApunableException;
-import tasks.ContactList;
-import tasks.Task;
-import tasks.TaskList;
+import models.ContactBook;
+import models.Task;
+import models.TaskList;
 import utils.Ui;
 
 /**
- * A specialized type of CommandHandler that handle tasks involving creating new task. 
+ * A specialized type of CommandHandler that handle models involving creating new task.
  */
 public abstract class CreateTaskHandler implements CommandHandler {
     @Override
     /**
      * A specific chunk of code that will be reused by all the CreateTaskHandler. 
      */
-    public void handle(TaskList taskList, ContactList contactList, Ui ui, 
-            String firstParam, HashMap<String, String> params) throws ApunableException {
+    public void handle(TaskList taskList, ContactBook contactList, Ui ui,
+                       String firstParam, HashMap<String, String> params) throws ApunableException {
         Task task = createTask(firstParam, params);
         taskList.add(task);
 
         ui.echo("Noted. I've added this task:");
         ui.echo("  " + task.toString());
-        ui.echo(String.format("Now you have %d tasks in the list.", taskList.size()));
+        ui.echo(String.format("Now you have %d models in the list.", taskList.size()));
     }
 
     /**

@@ -4,21 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import exceptions.ApunableException;
-import tasks.Contact;
-import tasks.ContactList;
-import tasks.TaskList;
+import models.Contact;
+import models.ContactBook;
+import models.TaskList;
 import utils.Ui;
 
 public class ContactAddTest {
     @Test
     public void handle_allFieldPresent_success() throws ApunableException {
         TaskList taskList = new TaskList();
-        ContactList contactList = new ContactList();
+        ContactBook contactList = new ContactBook();
         Ui ui = new Ui();
 
         Contact contact = new ContactBuilder().build();
 
-        ContactList expectedContactList = new ContactList();
+        ContactBook expectedContactList = new ContactBook();
         expectedContactList.add(contact);
 
         ContactAdd contactAdd = new ContactAdd();

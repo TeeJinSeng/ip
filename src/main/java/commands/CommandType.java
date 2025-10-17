@@ -16,8 +16,9 @@ public enum CommandType {
 
     ADD("addcontact", new ContactAdd()),
     DELETE_CONTACT("deletecontact", new ContactDelete()),
-    LIST_CONTACT("listcontact", new ContactHandlerList()),
-    // EDIT
+    LIST_CONTACT("listcontact", new ContactList()),
+    EDIT_CONTACT("editcontact", new ContactEdit()),
+    FILTER_CONTACT("filtercontact", new ContactFilter()),
     BYE("bye");
 
     private final String LABEL;
