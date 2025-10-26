@@ -16,7 +16,7 @@ public class HandlerList implements CommandHandler {
     public void handle(TaskList taskList, ContactBook contactList, Ui ui,
                        String firstParam, HashMap<String, String> params) throws ApunableException {
         if (taskList.size() == 0) {
-            ui.echo("There is no task in your list");
+            ui.echo("There is currently no task in your list");
         } else {
             ui.echo("Here are the models in your list:");
         

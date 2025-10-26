@@ -18,7 +18,7 @@ public class ContactDelete implements ContactHandler {
 
         String name = firstParam;
 
-        assert !name.isEmpty() : "No name provided for delete contact command";
+        assert !name.isEmpty() : "Erm... have you told me the person's name that you gonna delete?";
 
         HashMap<String, String> filterCriteria = new HashMap<>(1);
         filterCriteria.put("name", name);
@@ -27,7 +27,7 @@ public class ContactDelete implements ContactHandler {
         Contact contactToDelete = null;
 
         if (index.length == 0) {
-            throw new ApunableException("name not in the contact");
+            throw new ApunableException("Hmm... I couldn’t find anyone with that name in your contacts.");
         } else {
             contactToDelete = contactList.get(index[0]);
             contactList.remove(index[0]);

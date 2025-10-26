@@ -22,7 +22,7 @@ public class ContactEdit implements ContactHandler {
 
         String name = firstParam;
 
-        assert !name.isEmpty() : "No name provided for edit contact command";
+        assert !name.isEmpty() : "What's the person's name that you want to edit? ";
 
         HashMap<String, String> filterCriteria = new HashMap<>(1);
         filterCriteria.put("name", name);
@@ -31,7 +31,7 @@ public class ContactEdit implements ContactHandler {
         Contact contactToEdit = null;
 
         if (index.length == 0) {
-            throw new ApunableException("name not in the contact");
+            throw new ApunableException("Opps! The name is not in the contact.");
         }
 
         // Retrieve the original contact

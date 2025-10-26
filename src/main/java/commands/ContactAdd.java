@@ -18,11 +18,12 @@ public class ContactAdd implements ContactHandler {
                        String firstParam, HashMap<String, String> params) throws ApunableException {
 
         if (firstParam.isEmpty()) {
-            throw new ApunableException("Please provide name for the contact");
+            throw new ApunableException("Oops! You need to tell me the contact’s name first.");
         }
 
         if (!params.containsKey("phone") || !params.containsKey("email") || !params.containsKey("address")) {
-            throw new ApunableException("Please more information about the person");
+            throw new ApunableException(
+                    "Hmm... I’m missing some details. Please include the phone, email, and address.");
         }
 
         params.put("name", firstParam);
@@ -30,7 +31,7 @@ public class ContactAdd implements ContactHandler {
         Contact contactToAdd = new Contact(params);
 
         if (contactBook.hasPerson(contactToAdd)) {
-            throw new ApunableException("Name is already in contact");
+            throw new ApunableException("Looks like this name is already in your contact list!");
         }
 
         contactBook.add(contactToAdd);

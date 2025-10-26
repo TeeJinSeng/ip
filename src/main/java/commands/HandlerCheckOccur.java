@@ -20,11 +20,12 @@ public class HandlerCheckOccur implements CommandHandler {
     public void handle(TaskList taskList, ContactBook contactList, Ui ui,
                        String firstParam, HashMap<String, String> params) throws ApunableException {
 
-        assert !firstParam.isEmpty() : "Please provide date time for check-occur";
+        assert !firstParam.isEmpty() : "Umm, I think you forgot to provide a date :)";
 
         LocalDateTime inputDate = DateTimeUtil.tryParse(firstParam);
 
-        assert inputDate != null : "Invalid date time format";
+        assert inputDate != null
+                : "I used up all my knowledge and still can't recognize this date, consider using dd-mm-yyyy HH:mm";
 
         List<Task> occuringTasks = Stream.iterate(0, i -> i < taskList.size(), i -> i + 1)
                 .map(i -> taskList.get(i)).filter(task -> {
