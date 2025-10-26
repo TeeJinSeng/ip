@@ -9,14 +9,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
+    @FXML
+    private Polygon bubbleArrow;
     @FXML
     private ImageView displayPicture;
 
@@ -32,6 +40,19 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        setDisplayPicture(displayPicture);
+    }
+
+    public void setDisplayPicture(ImageView displayPicture) {
+        // assuming displayPicture is your ImageView
+        double arcSize = 20.0; // controls how rounded the corners are
+        double width = displayPicture.getFitWidth();
+        double height = displayPicture.getFitHeight();
+
+        Rectangle clip = new Rectangle(width, height);
+        clip.setArcWidth(arcSize);
+        clip.setArcHeight(arcSize);
+        displayPicture.setClip(clip);
     }
 
     /**
@@ -41,6 +62,7 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
+        bubbleArrow.setScaleX(-1);
         setAlignment(Pos.TOP_LEFT);
     }
 

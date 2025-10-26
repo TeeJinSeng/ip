@@ -88,10 +88,7 @@ public class ApunableBot {
             }
 
             return ui.getOutput();
-        } catch (ApunableException e) {
-            ui.showError(e.getMessage());
-            return ui.getOutput();
-        } catch (AssertionError e) {
+        } catch (ApunableException | AssertionError e) {
             ui.showError(e.getMessage());
             return ui.getOutput();
         }
