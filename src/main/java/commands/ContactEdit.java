@@ -10,6 +10,7 @@ import models.Contact;
 import models.ContactBook;
 import models.Phone;
 import models.TaskList;
+import utils.Storage;
 import utils.Ui;
 
 /**
@@ -17,7 +18,7 @@ import utils.Ui;
  */
 public class ContactEdit implements ContactHandler {
     @Override
-    public void handle(TaskList taskList, ContactBook contactList, Ui ui,
+    public void handle(TaskList taskList, ContactBook contactBook, Ui ui,
                        String firstParam, HashMap<String, String> params) throws ApunableException {
 
         String name = firstParam;
@@ -27,7 +28,7 @@ public class ContactEdit implements ContactHandler {
         HashMap<String, String> filterCriteria = new HashMap<>(1);
         filterCriteria.put("name", name);
 
-        Integer[] index = contactList.getIndices(filterCriteria);
+        Integer[] index = contactBook.getIndices(filterCriteria);
         Contact contactToEdit = null;
 
         if (index.length == 0) {
@@ -35,7 +36,7 @@ public class ContactEdit implements ContactHandler {
         }
 
         // Retrieve the original contact
-        Contact oldContact = contactList.get(index[0]);
+        Contact oldContact = contactBook.get(index[0]);
         Contact updatedContact = new Contact(oldContact);
 
         // Update only fields that are provided
@@ -78,7 +79,9 @@ public class ContactEdit implements ContactHandler {
         }
 
         // Save changes back into the list
-        contactList.set(index[0], updatedContact);
+        contactBook.set(index[0], updatedContact);
+
+        new Storage("data/contacts.txt").save(contactBook);
 
         ui.echo("Contact \"" + name + "\" has been updated successfully.");
     }

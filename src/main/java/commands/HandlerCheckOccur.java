@@ -20,7 +20,7 @@ public class HandlerCheckOccur implements CommandHandler {
     public void handle(TaskList taskList, ContactBook contactList, Ui ui,
                        String firstParam, HashMap<String, String> params) throws ApunableException {
 
-        assert !firstParam.isEmpty() : "Umm, I think you forgot to provide a date :)";
+        assert !firstParam.isEmpty() : "Umm, I think you forgot to provide a date time :)";
 
         LocalDateTime inputDate = DateTimeUtil.tryParse(firstParam);
 

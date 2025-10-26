@@ -6,6 +6,7 @@ import exceptions.ApunableException;
 import models.Contact;
 import models.ContactBook;
 import models.TaskList;
+import utils.Storage;
 import utils.Ui;
 
 /**
@@ -13,7 +14,7 @@ import utils.Ui;
  */
 public class ContactDelete implements ContactHandler {
     @Override
-    public void handle(TaskList taskList, ContactBook contactList, Ui ui,
+    public void handle(TaskList taskList, ContactBook contactBook, Ui ui,
                        String firstParam, HashMap<String, String> params) throws ApunableException {
 
         String name = firstParam;
@@ -23,14 +24,16 @@ public class ContactDelete implements ContactHandler {
         HashMap<String, String> filterCriteria = new HashMap<>(1);
         filterCriteria.put("name", name);
 
-        Integer[] index = contactList.getIndices(filterCriteria);
+        Integer[] index = contactBook.getIndices(filterCriteria);
         Contact contactToDelete = null;
 
         if (index.length == 0) {
             throw new ApunableException("Hmm... I couldn’t find anyone with that name in your contacts.");
         } else {
-            contactToDelete = contactList.get(index[0]);
-            contactList.remove(index[0]);
+            contactToDelete = contactBook.get(index[0]);
+            contactBook.remove(index[0]);
+
+            new Storage("data/contacts.txt").save(contactBook);
             
             ui.echo("Got it, I have deleted this contact: ");
             ui.echo("  " + contactToDelete.basicInfo());
