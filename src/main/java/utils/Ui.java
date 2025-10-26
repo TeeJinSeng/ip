@@ -69,7 +69,7 @@ public class Ui {
      * @param message the exception message. 
      */
     public void showError(String message) {
-        echo("Error: " + message);
+        echo(message);
     }
 
     /**

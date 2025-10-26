@@ -14,7 +14,7 @@ public class CreateTaskTodo extends CreateTaskHandler {
     public Task createTask(String firstParam, HashMap<String, String> params) throws ApunableException {
         String desc = firstParam;
         
-        assert !desc.isEmpty() : "Description for todo cannot be empty";
+        assert !desc.isEmpty() : "Can you provide me what is this todo about?";
     
         return new Todo(desc);
     }

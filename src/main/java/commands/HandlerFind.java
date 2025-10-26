@@ -17,7 +17,7 @@ public class HandlerFind implements CommandHandler {
     @Override
     public void handle(TaskList taskList, ContactBook contactList, Ui ui,
                        String firstParam, HashMap<String, String> params) throws ApunableException {
-        assert !firstParam.isEmpty() : "Find keyword cannot be empty";
+        assert !firstParam.isEmpty() : "Hmm... I can’t search for nothing! Try giving me a keyword to look for.";
 
         String lowerFirstParam = firstParam.toLowerCase();
 
