@@ -151,7 +151,8 @@ Format: `bye`
 Task list data are saved in the hard disk automatically after exiting the program, while contacts data are saved automatically after any command that changes the data. There is no need to save manually.
 
 ## Editing the data file
-datas are saved in `tasks.txt` and `contacts.txt` with specific format. Users who have learnt what is the format are welcome to update data directly by editing that data file
+datas are saved in `[JAR file location]/data/tasks.txt` and `[JAR file location]/data/contacts.txt` with specific format. Users who have learnt what is the format are welcome to update data directly by editing that data file
 
-> [!CAUTION]
-> This is a caution. It advises about potential negative consequences of an action.
+> !**CAUTION:**
+> If your changes to the data file makes its format invalid, ApunableBot might fail to recover some of the corrupted tasks or contacts and they will dissapear. Hence, it is recommended to take a backup of the file before editing it.
+Furthermore, certain edits can cause the ApunableBot to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
