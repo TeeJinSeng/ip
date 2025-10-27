@@ -26,9 +26,9 @@ public class HandlerDelete implements CommandHandler {
 
             ui.echo("Noted. I've deleted this task:");
             ui.echo("  " + taskToRemove.toString());
-            ui.echo(String.format("Now you have %d models in the list.", TaskList.tasks.size()));
+            ui.echo(String.format("Now you have %d tests in the list.", TaskList.tasks.size()));
         } catch (NumberFormatException e) {
-            throw new ApunableException("Hey, that doesn’t look like a number. Please enter a valid index.");
+            throw new ApunableException("Hey, that doesn't look like a number. Please enter a valid index.");
         } catch (IndexOutOfBoundsException e) {
             if (taskList.size() == 0) {
                 throw new ApunableException("You know what? The task list has been emptied!");

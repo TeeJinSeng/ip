@@ -15,7 +15,7 @@ Some example commands you can try:
     - `todo testing` - Adds a todo task.
     - `delete 1` - Delete the first task in the list. 
     - `listcontact` - Lists all contacts. 
-    - `addcontact Apunable /email apunable@gmail.com` - Adds a contact named `Apunable` into contact list.
+    - `addcontact Apunable /phone 12345678 /email apunable@gmail.com /address #00 Pineapple Field` - Adds a contact named `Apunable` into contact list.
     - `deletecontact Apunable` - Deletes the contact named `Apunable` from the contacts. 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -77,13 +77,13 @@ Format: `delete <index>`
 
 Example: `delete 1` Removes the first task in the list.
 
-## : Finding tasks occuring at specific date time: `check-occur`
+## Finding tasks occurring at specific date time: `check-occur`
 
-Shows a list of tasks occuring at provided date time in the task list.
+Shows a list of tasks occurring at provided date time in the task list.
 
 Format: `check-occur <datetime>`
 
-Example: `check-occur 2025-08-31 00:00` Shows all the deadlines which the `/by` is occuring at or after the provided time and all the events where the provided date time is withing `/from` and `/to`
+Example: `check-occur 2025-10-21 15:00` Shows all the deadlines which the `/by` is occuring at or after the provided time and all the events where the provided date time is withing `/from` and `/to`
 
 ## Finding tasks matching certain description: `find`
 
@@ -98,7 +98,7 @@ Adds a contact to the contact list.
 
 Format: `addcontact <name> [/firstname <firstname>] [/lastname <lastname>] /email <email> /phone <phone> /address <address> [/org <organization>] [/notes <notes>] [/nickname <nickname>] [/birthday <birthday>]`
 
-Example: `addcontact Crazy Dave /email dave@gmail.com` Adds a new contact named `Crazy Dave`. At least one among `email`, `phone`, `address` but be provided to add a new contact. The name must also be unique. 
+Example: `addcontact Crazy Dave /phone 87654321 /email dave@gmail.com /address Seattle, United States` Adds a new contact named `Crazy Dave`. `email`, `phone`, `address` must be provided to add a new contact. The names in contact must also be unique. 
 
 ## Deleting contacts: `deletecontact`
 
@@ -138,7 +138,7 @@ Format: `filtercontact [/name <name>] [/firstname <firstname>] [/lastname <lastn
 
 Example: 
 - `filtercontact /name Crazy Dave` Shows the person with name `Crazy Dave`. 
-- `filtercontact /org Pineapple Gang` Shows the persons in `Pineapple Gang`
+- `filtercontact /notes Apunable's client` Shows the persons who are `Apunable`'s client
 - `filtercontact /firstname Dave /birthday 28-02-2025` Shows the persons with firstname `Dave` and gave birth on `28-02-2025`. 
 
 ## Exiting the program: `bye`

@@ -28,7 +28,7 @@ public class ContactDelete implements ContactHandler {
         Contact contactToDelete = null;
 
         if (index.length == 0) {
-            throw new ApunableException("Hmm... I couldn’t find anyone with that name in your contacts.");
+            throw new ApunableException("Hmm... I couldn't find anyone with that name in your contacts.");
         } else {
             contactToDelete = contactBook.get(index[0]);
             contactBook.remove(index[0]);

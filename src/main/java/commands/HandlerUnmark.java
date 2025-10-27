@@ -16,7 +16,7 @@ public class HandlerUnmark implements CommandHandler {
     public void handle(TaskList taskList, ContactBook contactList, Ui ui,
                        String firstParam, HashMap<String, String> params) throws ApunableException {
 
-            assert !firstParam.isEmpty() : "Oops! I didn’t catch that, please give me a valid task number.";
+            assert !firstParam.isEmpty() : "Oops! I didn't catch that, please give me a valid task number.";
 
             try {
             int index = Integer.parseInt(firstParam) - 1;
@@ -31,13 +31,13 @@ public class HandlerUnmark implements CommandHandler {
                 ui.echo("  " + task.toString());
             }
         } catch (NumberFormatException e) {
-            throw new ApunableException("Hey, that doesn’t look like a number. Please enter a valid index.");
+            throw new ApunableException("Hey, that doesn't look like a number. Please enter a valid index.");
         } catch (IndexOutOfBoundsException e) {
             if (taskList.size() == 0) {
                 throw new ApunableException("Your taskList is empty! Nothing to mark as undone");
             }
             throw new ApunableException(String.format(
-                    "That number’s out of range! Please choose a task between 1 and %d.", taskList.size()));
+                    "That number's out of range! Please choose a task between 1 and %d.", taskList.size()));
         }
     }
 }

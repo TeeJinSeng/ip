@@ -9,7 +9,7 @@ import models.TaskList;
 import utils.Ui;
 
 /**
- * Handles the {@code list} command from user and list out all the added models.
+ * Handles the {@code list} command from user and list out all the added tasks.
  */
 public class HandlerList implements CommandHandler {
     @Override
@@ -18,7 +18,7 @@ public class HandlerList implements CommandHandler {
         if (taskList.size() == 0) {
             ui.echo("There is currently no task in your list");
         } else {
-            ui.echo("Here are the models in your list:");
+            ui.echo("Here are the tasks in your list:");
         
             Stream.iterate(0, i -> i < taskList.size(), i -> i + 1).forEach(i -> {
                     ui.echo(String.format("%d.%s", i + 1, taskList.get(i)));

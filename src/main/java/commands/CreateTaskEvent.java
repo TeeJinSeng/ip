@@ -26,8 +26,8 @@ public class CreateTaskEvent extends CreateTaskHandler {
         LocalDateTime from = DateTimeUtil.tryParse(fromStr);
         LocalDateTime to = DateTimeUtil.tryParse(toStr);
         
-        assert from != null : "Hmm... I couldn’t understand the /from time. Try something like '2025-10-26 14:00'.";
-        assert to != null : "I couldn’t read the /to time. Please use a clear format, like '2025-10-26 16:00'.";
+        assert from != null : "Hmm... I couldn't understand the /from time. Try something like '2025-10-26 14:00'.";
+        assert to != null : "I couldn't read the /to time. Please use a clear format, like '2025-10-26 16:00'.";
 
         return new Event(desc, from, to);
     }

@@ -11,13 +11,13 @@ import models.TaskList;
 import utils.Ui;
 
 /**
- * Handles the {@code find} command from user and list out all the models which descriptions contains the provided keyword.
+ * Handles the {@code find} command from user and list out all the tasks which descriptions contains the provided keyword.
  */
 public class HandlerFind implements CommandHandler {
     @Override
     public void handle(TaskList taskList, ContactBook contactList, Ui ui,
                        String firstParam, HashMap<String, String> params) throws ApunableException {
-        assert !firstParam.isEmpty() : "Hmm... I can’t search for nothing! Try giving me a keyword to look for.";
+        assert !firstParam.isEmpty() : "Hmm... I can't search for nothing! Try giving me a keyword to look for.";
 
         String lowerFirstParam = firstParam.toLowerCase();
 
@@ -30,7 +30,7 @@ public class HandlerFind implements CommandHandler {
         if (matchTasks.isEmpty()) {
             ui.echo("(no matching task)");
         } else {
-            ui.echo("Here are the matching models in your list:");
+            ui.echo("Here are the matching tasks in your list:");
 
             Stream.iterate(0, i -> i < matchTasks.size(), i -> i + 1).forEach(i -> {
                 ui.echo(String.format("%d.%s", i + 1, matchTasks.get(i)));

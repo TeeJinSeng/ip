@@ -9,7 +9,7 @@ import models.TaskList;
 import utils.Ui;
 
 /**
- * A specialized type of CommandHandler that handle models involving creating new task.
+ * A specialized type of CommandHandler that handle tasks involving creating new task.
  */
 public abstract class CreateTaskHandler implements CommandHandler {
     @Override
@@ -23,7 +23,7 @@ public abstract class CreateTaskHandler implements CommandHandler {
 
         ui.echo("Noted. I've added this task:");
         ui.echo("  " + task.toString());
-        ui.echo(String.format("Now you have %d models in the list.", taskList.size()));
+        ui.echo(String.format("Now you have %d tasks in the list.", taskList.size()));
     }
 
     /**

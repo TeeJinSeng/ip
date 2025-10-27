@@ -13,7 +13,7 @@ import utils.DateTimeUtil;
 import utils.Ui;
 
 /**
- * Prints a list of models that occur at given date(i.e. {@code task.isOccuringAt()} return true).
+ * Prints a list of tasks that occur at given date(i.e. {@code task.isOccuringAt()} return true).
  */
 public class HandlerCheckOccur implements CommandHandler {
     @Override
@@ -34,9 +34,9 @@ public class HandlerCheckOccur implements CommandHandler {
                 }).toList();
 
         if (occuringTasks.isEmpty()) {
-            ui.echo("(no models occuring at given date time)");
+            ui.echo("(no tasks occuring at given date time)");
         } else {
-            ui.echo("Here are the models occuring on this date:");
+            ui.echo("Here are the tasks occuring on this date:");
 
             Stream.iterate(0, i -> i < occuringTasks.size(), i -> i + 1).forEach(i -> {
                 ui.echo(String.format("%d.%s", i + 1, occuringTasks.get(i)));

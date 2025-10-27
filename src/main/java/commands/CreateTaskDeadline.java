@@ -22,7 +22,7 @@ public class CreateTaskDeadline extends CreateTaskHandler {
 
         LocalDateTime by = DateTimeUtil.tryParse(byStr);
 
-        assert by != null : "I couldn’t understand the /by time. Try something like '2025-10-26 23:59'.";
+        assert by != null : "I couldn't understand the /by time. Try something like '2025-10-26 23:59'.";
 
         return new Deadline(desc, by);
     }

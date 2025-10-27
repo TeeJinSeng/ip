@@ -18,12 +18,12 @@ public class ContactAdd implements ContactHandler {
                        String firstParam, HashMap<String, String> params) throws ApunableException {
 
         if (firstParam.isEmpty()) {
-            throw new ApunableException("Oops! You need to tell me the contact’s name first.");
+            throw new ApunableException("Oops! You need to tell me the contact's name first.");
         }
 
         if (!params.containsKey("phone") || !params.containsKey("email") || !params.containsKey("address")) {
             throw new ApunableException(
-                    "Hmm... I’m missing some details. Please include the phone, email, and address.");
+                    "Hmm... I'm missing some details. Please include the phone, email, and address.");
         }
 
         params.put("name", firstParam);

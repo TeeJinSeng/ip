@@ -21,7 +21,7 @@ public class CreateTaskEventTest {
 
             Task event = test.createTask("eve", params);
 
-            assertEquals(event.toString(), "[E][ ] eve (from: Jan 1 2025 to: Sept 11 2025)");
+            assertEquals(event.toString(), "[E][ ] eve (from: Jan 1 2025 to: Sep 11 2025)");
         } catch (Exception e) {}
     }
 }
